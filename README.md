@@ -2,7 +2,12 @@
 
 This is the code for the Flowable Training *DP*: Developing with Flowable Platform.
 
-## Index
+## Getting started
+
+Most of the lessons are based on Flowable Work. To follow any of the lessons, use the `0-flowble-work-base` module as a base and
+add code as you go along. For any lessons that includes code, the respective module provides fully working examples.
+
+## Index of lessons with code examples
 
 | ﻿Lesson | Topic                                      | Code | Description                                                                                                                                                     |
 |--------|--------------------------------------------|------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------|
