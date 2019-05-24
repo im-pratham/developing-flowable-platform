@@ -32,12 +32,13 @@
             <artifactId>flowable-spring-boot-starter-platform-actuator</artifactId>
         </dependency>
 
-        <!-- Start Optional dependencies that can help in demos -->
-        <!--
+        <!-- Adds capability to define tenants and user definitions-->
         <dependency>
             <groupId>com.flowable.platform</groupId>
             <artifactId>flowable-tenant-setup</artifactId>
         </dependency>
+
+        <!-- Default models and example apps -->
         <dependency>
             <groupId>com.flowable.platform</groupId>
             <artifactId>flowable-platform-default-models</artifactId>
@@ -50,11 +51,6 @@
             <groupId>com.flowable.platform</groupId>
             <artifactId>flowable-platform-example-apps</artifactId>
         </dependency>
-        -->
-        <!-- End Optional dependencies that can help in demos -->
-
-        <!-- Adds capability to define tenants and user definitions-->
-        <!-- Adds default models necessary for some flowable work features-->
 
         <!-- For training purposes, we use the lightweight h2 database in memory or on the file system -->
         <dependency>
