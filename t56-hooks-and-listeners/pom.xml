@@ -11,6 +11,12 @@
 
     <artifactId>t56-hooks-and-listeners</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>com.flowable.training.dp</groupId>
+            <artifactId>flowable-work-base</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+    </dependencies>
 
 </project>
