@@ -16,13 +16,27 @@ import com.flowable.platform.common.security.SecurityConstants;
 /**
  * Configure access to spring boot actuators
  */
-@ConditionalOnClass(EndpointRequest.class)
+
 @Configuration
-@Order(6) // Actuator configuration should kick in before the Form Login there should always be http basic for the endpoints
+@Order(6) // Actuator configuration should kick in before the Form Login there should always be HTTP basic for the endpoints
 public class SecurityActuatorConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 
+        http
+            .sessionManagement()
+            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+            .and()
+            .csrf()
+            .disable();
+
+        http
+            .requestMatcher(new ActuatorRequestMatcher())
+            .authorizeRequests()
+            .requestMatchers(EndpointRequest.to(InfoEndpoint.class, HealthEndpoint.class)).permitAll()
+            .requestMatchers(EndpointRequest.toAnyEndpoint()).hasAuthority(SecurityConstants.ACCESS_ACTUATORS)
+            .anyRequest().denyAll()
+            .and().httpBasic();
     }
 }

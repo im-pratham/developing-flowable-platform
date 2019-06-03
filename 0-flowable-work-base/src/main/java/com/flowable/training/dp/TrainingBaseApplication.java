@@ -9,7 +9,6 @@ import org.springframework.context.annotation.PropertySource;
 @SpringBootApplication(exclude = {
     FreeMarkerAutoConfiguration.class
 })
-@PropertySource("classpath:base-application.properties")
 public class TrainingBaseApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
