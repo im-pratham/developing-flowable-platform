@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-@SpringBootTest(classes = { HooksAndListenersApp.class })
+@SpringBootTest(classes = { T56WorkApplication.class })
 public class IntegrationTest {
 
     @Autowired

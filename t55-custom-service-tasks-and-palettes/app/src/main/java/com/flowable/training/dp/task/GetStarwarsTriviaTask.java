@@ -5,6 +5,8 @@ import java.util.List;
 import org.flowable.common.engine.api.variable.VariableContainer;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.flowable.platform.tasks.AbstractPlatformTask;
 import com.flowable.platform.tasks.ExtensionElementsContainer;
 import com.flowable.training.dp.service.StarwarsTriviaService;
@@ -26,7 +28,9 @@ public class GetStarwarsTriviaTask extends AbstractPlatformTask {
         String triviaType = getStringExtensionElementValue("triviaType", extensionElementsContainer, variableContainer, "ERROR");
 
         List results = starwarsTriviaService.getTriviaByType(triviaType);
-        variableContainer.setVariable(targetVariable, results);
+        JsonNode node = new ObjectMapper().convertValue(results, JsonNode.class);
+
+        variableContainer.setVariable(targetVariable, node);
     }
 
 

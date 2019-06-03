@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.flowable.common.engine.api.FlowableIllegalArgumentException;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,6 +16,7 @@ import com.flowable.training.dp.model.People;
 import com.flowable.training.dp.model.Planets;
 import com.flowable.training.dp.model.Species;
 import com.flowable.training.dp.model.Starships;
+import com.flowable.training.dp.model.StarwarsDataResponse;
 import com.flowable.training.dp.model.Vehicles;
 import com.flowable.training.dp.service.StarwarsTriviaService;
 
@@ -21,43 +24,66 @@ import com.flowable.training.dp.service.StarwarsTriviaService;
 @Service
 public class StarwarsTriviaServiceImpl implements StarwarsTriviaService {
 
-    private static final String SWAPI_BASE_URL = "https://swapi.com/";
+    private static final String SWAPI_BASE_URL = "https://swapi.co/api/";
 
     private final RestTemplate restTemplate;
+    private final HttpEntity<List> httpEntity;
 
     public StarwarsTriviaServiceImpl() {
         this.restTemplate = new RestTemplate();
+        final HttpHeaders headers = new HttpHeaders();
+        headers.set("User-Agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36");
+        this.httpEntity = new HttpEntity<>(headers);
     }
 
     @Override
     public List<People> getPeople() {
-        return restTemplate.exchange(SWAPI_BASE_URL + "people", HttpMethod.GET, null, new ParameterizedTypeReference<List<People>>(){}).getBody();
+         return restTemplate.exchange(SWAPI_BASE_URL + "people", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<StarwarsDataResponse<People>>(){}).getBody().getResults();
     }
 
     @Override
     public List<Films> getFilms() {
-        return restTemplate.exchange(SWAPI_BASE_URL + "films", HttpMethod.GET, null, new ParameterizedTypeReference<List<Films>>(){}).getBody();
+        return restTemplate.exchange(SWAPI_BASE_URL + "films", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<StarwarsDataResponse<Films>>(){}).getBody().getResults();
     }
 
     @Override
     public List<Starships> getStarships() {
-        return restTemplate.exchange(SWAPI_BASE_URL + "starships", HttpMethod.GET, null, new ParameterizedTypeReference<List<Starships>>(){}).getBody();
+        return restTemplate.exchange(SWAPI_BASE_URL + "starships", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<StarwarsDataResponse<Starships>>(){}).getBody().getResults();
     }
 
     @Override
     public List<Vehicles> getVehicles() {
-        return restTemplate.exchange(SWAPI_BASE_URL + "vehicles", HttpMethod.GET, null, new ParameterizedTypeReference<List<Vehicles
-            >>(){}).getBody();
+        return restTemplate.exchange(SWAPI_BASE_URL + "vehicles", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<StarwarsDataResponse<Vehicles>>(){}).getBody().getResults();
     }
 
     @Override
     public List<Species> getSpecies() {
-        return restTemplate.exchange(SWAPI_BASE_URL + "species", HttpMethod.GET, null, new ParameterizedTypeReference<List<Species>>(){}).getBody();
+        return restTemplate.exchange(SWAPI_BASE_URL + "species", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<StarwarsDataResponse<Species>>(){}).getBody().getResults();
     }
 
     @Override
     public List<Planets> getPlanets() {
-        return restTemplate.exchange(SWAPI_BASE_URL + "planets", HttpMethod.GET, null, new ParameterizedTypeReference<List<Planets>>(){}).getBody();
+        return restTemplate.exchange(SWAPI_BASE_URL + "planets", HttpMethod.GET, httpEntity, new ParameterizedTypeReference<StarwarsDataResponse<Planets>>() {}).getBody().getResults();
+    }
+    @Override
+    public People getPerson(long id) {
+        return restTemplate.exchange(SWAPI_BASE_URL + "people" + "/" + id, HttpMethod.GET, httpEntity, People.class).getBody();
+    }
+    @Override
+    public Films getFilm(long id) {
+        return restTemplate.exchange(SWAPI_BASE_URL + "films" + "/" + id, HttpMethod.GET, httpEntity, Films.class).getBody();
+    }
+    @Override
+    public Starships getStarship(long id) {
+        return restTemplate.exchange(SWAPI_BASE_URL + "starships" + "/" + id, HttpMethod.GET, httpEntity, Starships.class).getBody();
+    }
+    @Override
+    public Vehicles getVehicle(long id) {
+        return restTemplate.exchange(SWAPI_BASE_URL + "vehicles" + "/" + id, HttpMethod.GET, httpEntity, Vehicles.class).getBody();
+    }
+    @Override
+    public Planets getPlanet(long id) {
+        return restTemplate.exchange(SWAPI_BASE_URL + "planets" + "/" + id, HttpMethod.GET, httpEntity, Planets.class).getBody();
     }
 
     @Override

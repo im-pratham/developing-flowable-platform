@@ -13,7 +13,7 @@ import com.flowable.design.servlet.AppDispatcherServletConfiguration;
     AppDispatcherServletConfiguration.class
 })
 @SpringBootApplication
-public class DevelopingFlowablePlatformDesignApp extends FlowableModelerApplication {
+public class DevelopingFlowablePlatformDesignApp {
 
     public static void main(String[] args) {
         SpringApplication.run(DevelopingFlowablePlatformDesignApp.class, args);

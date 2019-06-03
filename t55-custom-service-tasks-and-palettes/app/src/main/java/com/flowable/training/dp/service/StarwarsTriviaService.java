@@ -17,6 +17,13 @@ public interface StarwarsTriviaService {
     List<Vehicles> getVehicles();
     List<Species> getSpecies();
     List<Planets> getPlanets();
+
+    People getPerson(long id);
+    Films getFilm(long id);
+    Starships getStarship(long id);
+    Vehicles getVehicle(long id);
+    Planets getPlanet(long id);
+
     List<?> getTriviaByType(String triviaType);
     List<?> getTriviaByClass(Class<?> triviaClass);
 }

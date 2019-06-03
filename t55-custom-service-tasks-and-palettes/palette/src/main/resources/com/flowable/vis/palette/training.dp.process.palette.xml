@@ -4,7 +4,7 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://www.edorasware.com/schema/vis/palette http://www.edorasware.com/schema/vis/edoras-vis-process-palette-2.0.59.xsd"
          apply-patch-to-palette="flowable-platform-process-palette"
-         resource-bundle="i18n/training-dp-translation.properties">
+         resource-bundle="i18n/translation.properties">
 
     <component-presentations base-palette-icon-path="component-presentations/palette-icons" base-editor-view-path="component-presentations/editor-views">
         <component-presentation id="Starwars.presentation"
@@ -38,7 +38,7 @@
         <attribute id="tasktype" value="Service" visible="false"/>
         <attribute id="delegateexpression" value="${getStarwarsTriviaTask}" visible="false" constant="true"/>
         <attribute id="expression" visible="false"/>
-        <attribute id="resultvariable" visible="true"/>
+        <attribute id="resultvariable" visible="false"/>
         <attribute id="class" visible="false"/>
         <attribute id="classfields" value="" visible="false"/>
         <attribute id="servicetasktriggerable" value="" visible="false"/>
