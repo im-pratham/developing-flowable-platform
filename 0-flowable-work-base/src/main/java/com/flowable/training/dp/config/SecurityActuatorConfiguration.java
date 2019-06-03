@@ -23,19 +23,6 @@ public class SecurityActuatorConfiguration extends WebSecurityConfigurerAdapter 
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-            .sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            .and()
-            .csrf()
-            .disable();
 
-        http
-            .requestMatcher(new ActuatorRequestMatcher())
-            .authorizeRequests()
-            .requestMatchers(EndpointRequest.to(InfoEndpoint.class, HealthEndpoint.class)).permitAll()
-            .requestMatchers(EndpointRequest.toAnyEndpoint()).hasAuthority(SecurityConstants.ACCESS_ACTUATORS)
-            .anyRequest().denyAll()
-            .and().httpBasic();
     }
 }

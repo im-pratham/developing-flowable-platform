@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<palette id="training-dp-work-palette"
+         xmlns="http://www.edorasware.com/schema/vis/palette"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://www.edorasware.com/schema/vis/palette http://www.edorasware.com/schema/vis/edoras-vis-process-palette-2.0.59.xsd"
+         apply-patch-to-palette="flowable-platform-process-palette"
+         resource-bundle="i18n/training-dp-translation.properties">
+
+    <component-presentations base-palette-icon-path="component-presentations/palette-icons" base-editor-view-path="component-presentations/editor-views">
+        <component-presentation id="Starwars.presentation"
+                                palette-icon-path="jedi.png"
+                                palette-big-icon-path="jedi.svg"/>
+    </component-presentations>
+
+    <custom-categories>
+        <category id="training" index="9000" />
+    </custom-categories>
+
+    <group id="training-activities" index="305">
+
+    <component id="GetStarwarsTriviaTask" extends="ServiceTask" attribute-groups="baseAttributes,activitiMultiInstanceAttributes" presentation-id="Starwars.presentation">
+
+        <attribute id="triviaType" value="people" type="ComboBox" visible="true" category="edoras" optional="false" runtime="false" export="true" extension-element="true" xml-name="triviaType">
+            <items>
+                <item id="people" title="People" value="people"/>
+                <item id="films" title="Films" value="films"/>
+                <item id="starships" title="Starships" value="starships"/>
+                <item id="vehicles" title="Vehicles" value="vehicles"/>
+                <item id="species" title="Species" value="species"/>
+                <item id="planets" title="Planets" value="planets"/>
+            </items>
+        </attribute>
+        <attribute id="targetVariable" value="starwarsFacts" type="SimpleTextExpression" visible="true" category="edoras" optional="false" runtime="false" export="true" extension-element="true" xml-name="targetVariable" />
+
+
+        <attribute id="name" category="common" optional="true"/>
+        <attribute id="overwrite" visible="false"/>
+        <attribute id="tasktype" value="Service" visible="false"/>
+        <attribute id="delegateexpression" value="${getStarwarsTriviaTask}" visible="false" constant="true"/>
+        <attribute id="expression" visible="false"/>
+        <attribute id="resultvariable" visible="true"/>
+        <attribute id="class" visible="false"/>
+        <attribute id="classfields" value="" visible="false"/>
+        <attribute id="servicetasktriggerable" value="" visible="false"/>
+        <attribute id="servicetaskUseLocalScopeForResultVariable" value="" visible="false"/>
+        <attribute id="genericproperty" value="" visible="false"/>
+
+    </component>
+
+    </group>
+</palette>

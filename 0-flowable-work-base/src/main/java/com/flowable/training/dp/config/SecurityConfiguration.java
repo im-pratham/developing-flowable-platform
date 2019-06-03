@@ -1,5 +1,4 @@
 package com.flowable.training.dp.config;
-
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
@@ -33,23 +32,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         if (rememberMeServices instanceof AbstractRememberMeServices) {
             key = ((AbstractRememberMeServices) rememberMeServices).getKey();
         }
-
         http
             .csrf().disable()
             // Frontend would eventually load browser's PDF viewer using object/embed
             // To avoid problems in some scenarios, we need to do set X-Frame-Options sameorigin;
             .headers().frameOptions().sameOrigin()
 
-            // In case you want to disable JSESSIONID cookies.
-            // Flowable's Authentication class expects AuthenticationSuccessEvent to be fired
-            // every time, and sending the cookie makes it fail from time to time. Check class
-            // SecurityAutoConfiguration for insights on how is this configured.
-            // Two things to notice:
-            // 1. You have to add basic auth to /frontend/engage/api/auth.ts
-            //    Axios.defaults.auth = { username, password };
-            // 2. WebSockets+SocksJS, https://github.com/sockjs/sockjs-client/issues/196
-            //.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-            //.and()
             .and()
             .rememberMe()
             .key(key)
@@ -61,7 +49,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             .and()
             // Non authenticated exception handling. The formLogin and httpBasic configure the exceptionHandling
             // We have to initialize the exception handling with a default authentication entry point in order to return 401 each time and not have a
-            // forward due to the formLogin or the http basic popup due to the httpBasic
+            // forward due to the formLogin or the HTTP basic popup due to the httpBasic
             .exceptionHandling()
             .defaultAuthenticationEntryPointFor(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED), AnyRequestMatcher.INSTANCE)
             .and()
@@ -77,9 +65,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
             // allow context root for all (it triggers the loading of the initial page)
             .antMatchers("/") .permitAll()
             .antMatchers(
-                    "/**/*.svg", "/**/*.ico", "/**/*.png", "/**/*.woff2", "/**/*.css",
-                    "/**/*.woff", "/**/*.html", "/**/*.js",
-                    "/**/index.html").permitAll()
+                "/**/*.svg", "/**/*.ico", "/**/*.png", "/**/*.woff2", "/**/*.css",
+                "/**/*.woff", "/**/*.html", "/**/*.js",
+                "/**/index.html").permitAll()
             .anyRequest().authenticated()
             .and()
             .httpBasic();
