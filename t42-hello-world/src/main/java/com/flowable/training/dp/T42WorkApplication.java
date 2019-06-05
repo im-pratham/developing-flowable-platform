@@ -5,11 +5,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.freemarker.FreeMarkerAutoConfiguration;
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
-public class T42WorkApplication extends TrainingBaseApplication {
+@SpringBootApplication(exclude = {
+    FreeMarkerAutoConfiguration.class
+})
+public class T42WorkApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(T42WorkApplication
-            .class, args);
+        SpringApplication.run(T42WorkApplication.class, args);
     }
 
 }
