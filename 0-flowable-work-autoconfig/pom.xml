@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>developing-with-flowable-platform</artifactId>
+        <groupId>com.flowable.training.dp</groupId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>flowable-work-autoconfig</artifactId>
+
+    <dependencies>
+        <!-- Includes all platform dependencies including the rest api -->
+        <dependency>
+            <groupId>com.flowable.platform</groupId>
+            <artifactId>flowable-spring-boot-starter-platform-rest</artifactId>
+        </dependency>
+
+        <!-- Includes the frontend for flowable work -->
+        <dependency>
+            <groupId>com.flowable.work</groupId>
+            <artifactId>flowable-work-frontend</artifactId>
+        </dependency>
+
+        <!-- Includes the flowable specific actuators, including the spring actuators -->
+        <dependency>
+            <groupId>com.flowable.platform</groupId>
+            <artifactId>flowable-spring-boot-starter-platform-actuator</artifactId>
+        </dependency>
+
+        <!-- Adds capability to define tenants and platform definitions-->
+        <dependency>
+            <groupId>com.flowable.platform</groupId>
+            <artifactId>flowable-tenant-setup</artifactId>
+        </dependency>
+
+        <!-- Default models and example apps -->
+        <dependency>
+            <groupId>com.flowable.platform</groupId>
+            <artifactId>flowable-platform-default-models</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.flowable.platform</groupId>
+            <artifactId>flowable-platform-default-idm-models</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.flowable.platform</groupId>
+            <artifactId>flowable-platform-example-apps</artifactId>
+        </dependency>
+
+        <!-- For training purposes, we use the lightweight h2 database in memory or on the file system -->
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+        </dependency>
+
+        <!-- Including tomcat enables executable jar -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-tomcat</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Use log4j for logging -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+        <!-- Annotation processor to enable IDE support for property files -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+
+        <!-- Test dependencies -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+            <!-- Exclude junit to be able to use junit5 -->
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- Include JUnit 5 dependencies -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-params</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Include assertj for fluent assertions -->
+        <dependency>
+            <groupId>net.javacrumbs.json-unit</groupId>
+            <artifactId>json-unit-assertj</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+</project>

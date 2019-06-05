@@ -1,4 +1,4 @@
-package com.flowable.training.dp.config;
+package com.flowable.training.db;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;

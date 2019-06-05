@@ -3,10 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
+    <parent>
+        <groupId>com.flowable.training.dp</groupId>
+        <artifactId>t55-custom-service-tasks-and-palettes-root</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
     <modelVersion>4.0.0</modelVersion>
     <artifactId>t55-custom-service-tasks-and-palettes-palette</artifactId>
-    <groupId>com.flowable.training.dp</groupId>
     <version>0.0.1-SNAPSHOT</version>
 
     <build>

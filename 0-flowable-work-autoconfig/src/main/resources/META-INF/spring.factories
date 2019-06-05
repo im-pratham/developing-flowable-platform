@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=com.flowable.training.db.WorkAutoConfiguration
+org.springframework.boot.env.EnvironmentPostProcessor=com.flowable.training.db.FlowablePlatformTrainingDefaultEnvironmentPostProcessor

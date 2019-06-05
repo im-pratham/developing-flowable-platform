@@ -1,0 +1,299 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:flowable="http://flowable.org/bpmn"
+             xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
+             xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema"
+             expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://flowable.org/test">
+  <process id="integrationTestProcess" name="integration-test-process" isExecutable="true">
+    <extensionElements>
+      <flowable:historyLevel xmlns:flowable="http://flowable.org/bpmn"><![CDATA[audit]]></flowable:historyLevel>
+      <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[BPMNDiagram]]></design:stencilid>
+      <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[BPMNDiagram]]></design:stencilsuperid>
+      <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:customstencil>
+      <design:id xmlns:design="http://flowable.org/design"><![CDATA[integrationTestProcess]]></design:id>
+      <design:name xmlns:design="http://flowable.org/design"><![CDATA[integration-test-process]]></design:name>
+      <design:guid xmlns:design="http://flowable.org/design"><![CDATA[PROCESS_MODEL-a9971c5d-9efa-4866-a429-54fba9e9bdb1]]></design:guid>
+      <design:language xmlns:design="http://flowable.org/design"><![CDATA[English]]></design:language>
+      <design:creationdate xmlns:design="http://flowable.org/design"><![CDATA[2019-06-05T08:19:38.734Z]]></design:creationdate>
+      <design:modificationdate xmlns:design="http://flowable.org/design"><![CDATA[2019-06-05T08:29:44.132Z]]></design:modificationdate>
+      <design:isexecutable xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:isexecutable>
+      <design:isprocessexecutable xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:isprocessexecutable>
+      <design:fontsize xmlns:design="http://flowable.org/design"><![CDATA[12]]></design:fontsize>
+      <design:fontweight xmlns:design="http://flowable.org/design"><![CDATA[normal]]></design:fontweight>
+      <design:fontstyle xmlns:design="http://flowable.org/design"><![CDATA[normal]]></design:fontstyle>
+      <design:fontcolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:fontcolor>
+      <design:process_historylevel xmlns:design="http://flowable.org/design"><![CDATA[audit]]></design:process_historylevel>
+      <design:iseagerexecutionfetch xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:iseagerexecutionfetch>
+      <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[BPMNDiagram]]></design:xmlTag>
+      <design:process_id xmlns:design="http://flowable.org/design"><![CDATA[integrationTestProcess]]></design:process_id>
+    </extensionElements>
+    <startEvent id="startnoneevent1" flowable:initiator="initiator">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudstartnoneevent]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[StartNoneEvent]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["StartNoneEvent"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:interrupting xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:interrupting>
+        <design:exclusive xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:exclusive>
+        <design:trigger xmlns:design="http://flowable.org/design"><![CDATA[None]]></design:trigger>
+        <design:async xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:async>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[startnoneevent1]]></design:id>
+        <design:initiator xmlns:design="http://flowable.org/design"><![CDATA[initiator]]></design:initiator>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudstartnoneevent]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[StartNoneEvent]]></design:xmlTag>
+      </extensionElements>
+    </startEvent>
+    <serviceTask id="synServiceTask" name="Synchronous Service Task" flowable:expression="${syncService.call()}" flowable:resultVariableName="greeting">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudservicetask]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[ServiceTask]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["Task","ServiceTask"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:guid xmlns:design="http://flowable.org/design"><![CDATA[GEAR-daff83f9-bb35-4c61-a8ed-b199f6e76a67]]></design:guid>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[synServiceTask]]></design:id>
+        <design:loopelementindexvariable xmlns:design="http://flowable.org/design"><![CDATA[loopCounter]]></design:loopelementindexvariable>
+        <design:tasktype xmlns:design="http://flowable.org/design"><![CDATA[Service]]></design:tasktype>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:callacitivity xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:callacitivity>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:looptype xmlns:design="http://flowable.org/design"><![CDATA[None]]></design:looptype>
+        <design:name xmlns:design="http://flowable.org/design"><![CDATA[Synchronous Service Task]]></design:name>
+        <design:name_en_us xmlns:design="http://flowable.org/design"><![CDATA[Synchronous Service Task]]></design:name_en_us>
+        <design:expression xmlns:design="http://flowable.org/design"><![CDATA[${syncService.call()}]]></design:expression>
+        <design:resultvariable xmlns:design="http://flowable.org/design"><![CDATA[greeting]]></design:resultvariable>
+        <design:servicetaskuselocalscopeforresultvariable xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:servicetaskuselocalscopeforresultvariable>
+        <design:async xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:async>
+        <design:exclusive xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:exclusive>
+        <design:servicetasktriggerable xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:servicetasktriggerable>
+        <design:isforcompensation xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:isforcompensation>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudservicetask]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[ServiceTask]]></design:xmlTag>
+      </extensionElements>
+    </serviceTask>
+    <serviceTask id="asyncServiceTask" name="Async Service Task" flowable:async="true" flowable:exclusive="false" flowable:delegateExpression="${asyncService}">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudservicetask]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[ServiceTask]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["Task","ServiceTask"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:guid xmlns:design="http://flowable.org/design"><![CDATA[GEAR-86883d69-c41b-4412-b4d1-53ed8e54a8e7]]></design:guid>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[asyncServiceTask]]></design:id>
+        <design:loopelementindexvariable xmlns:design="http://flowable.org/design"><![CDATA[loopCounter]]></design:loopelementindexvariable>
+        <design:tasktype xmlns:design="http://flowable.org/design"><![CDATA[Service]]></design:tasktype>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:callacitivity xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:callacitivity>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:looptype xmlns:design="http://flowable.org/design"><![CDATA[None]]></design:looptype>
+        <design:name xmlns:design="http://flowable.org/design"><![CDATA[Async Service Task]]></design:name>
+        <design:name_en_us xmlns:design="http://flowable.org/design"><![CDATA[Async Service Task]]></design:name_en_us>
+        <design:name-run xmlns:design="http://flowable.org/design"><![CDATA[Async Service Task]]></design:name-run>
+        <design:delegateexpression xmlns:design="http://flowable.org/design"><![CDATA[${asyncService}]]></design:delegateexpression>
+        <design:servicetaskuselocalscopeforresultvariable xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:servicetaskuselocalscopeforresultvariable>
+        <design:async xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:async>
+        <design:exclusive xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:exclusive>
+        <design:servicetasktriggerable xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:servicetasktriggerable>
+        <design:isforcompensation xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:isforcompensation>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudservicetask]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[ServiceTask]]></design:xmlTag>
+      </extensionElements>
+    </serviceTask>
+    <sequenceFlow id="sequenceflow1" sourceRef="startnoneevent1" targetRef="synServiceTask">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudsequenceflow]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[SequenceFlow]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["SequenceFlow"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:isimmediate xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:isimmediate>
+        <design:defaultflow xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:defaultflow>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[sequenceflow1]]></design:id>
+        <design:conditiontype xmlns:design="http://flowable.org/design"><![CDATA[None]]></design:conditiontype>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:showdiamondmarker xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:showdiamondmarker>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudsequenceflow]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[SequenceFlow]]></design:xmlTag>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceflow2" sourceRef="synServiceTask" targetRef="asyncServiceTask">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudsequenceflow]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[SequenceFlow]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["SequenceFlow"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:isimmediate xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:isimmediate>
+        <design:defaultflow xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:defaultflow>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[sequenceflow2]]></design:id>
+        <design:conditiontype xmlns:design="http://flowable.org/design"><![CDATA[None]]></design:conditiontype>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:showdiamondmarker xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:showdiamondmarker>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudsequenceflow]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[SequenceFlow]]></design:xmlTag>
+      </extensionElements>
+    </sequenceFlow>
+    <endEvent id="_endnoneevent2">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloud_endnoneevent]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[EndNoneEvent]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["EndNoneEvent"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[_endnoneevent2]]></design:id>
+        <design:terminateall xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:terminateall>
+        <design:trigger xmlns:design="http://flowable.org/design"><![CDATA[None]]></design:trigger>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloud_endnoneevent]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[EndNoneEvent]]></design:xmlTag>
+      </extensionElements>
+    </endEvent>
+    <userTask id="userTask" name="User Task" flowable:assignee="${initiator}">
+      <extensionElements>
+        <modeler:initiator-can-complete xmlns:modeler="http://flowable.org/modeler"><![CDATA[false]]></modeler:initiator-can-complete>
+        <modeler:activiti-idm-initiator xmlns:modeler="http://flowable.org/modeler"><![CDATA[true]]></modeler:activiti-idm-initiator>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloud_formtask]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[FormTask]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["Task","FormTask"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[userTask]]></design:id>
+        <design:guid xmlns:design="http://flowable.org/design"><![CDATA[GEAR-58c2024d-6f5e-45bb-8628-dd7c11d177b0]]></design:guid>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:isforcompensation xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:isforcompensation>
+        <design:loopelementindexvariable xmlns:design="http://flowable.org/design"><![CDATA[loopCounter]]></design:loopelementindexvariable>
+        <design:callacitivity xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:callacitivity>
+        <design:async xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:async>
+        <design:looptype xmlns:design="http://flowable.org/design"><![CDATA[None]]></design:looptype>
+        <design:assignee-run xmlns:design="http://flowable.org/design"><![CDATA[${initiator}]]></design:assignee-run>
+        <design:tasktype xmlns:design="http://flowable.org/design"><![CDATA[FormTask]]></design:tasktype>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:exclusive xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:exclusive>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloud_formtask]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:name xmlns:design="http://flowable.org/design"><![CDATA[User Task]]></design:name>
+        <design:name_en_us xmlns:design="http://flowable.org/design"><![CDATA[User Task]]></design:name_en_us>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[FormTask]]></design:xmlTag>
+      </extensionElements>
+    </userTask>
+    <sequenceFlow id="sequenceflow4" sourceRef="asyncServiceTask" targetRef="userTask">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudsequenceflow]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[SequenceFlow]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["SequenceFlow"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:isimmediate xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:isimmediate>
+        <design:defaultflow xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:defaultflow>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[sequenceflow4]]></design:id>
+        <design:conditiontype xmlns:design="http://flowable.org/design"><![CDATA[None]]></design:conditiontype>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:showdiamondmarker xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:showdiamondmarker>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudsequenceflow]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[SequenceFlow]]></design:xmlTag>
+      </extensionElements>
+    </sequenceFlow>
+    <sequenceFlow id="sequenceflow5" sourceRef="userTask" targetRef="timerEvent">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudsequenceflow]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[SequenceFlow]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["SequenceFlow"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:isimmediate xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:isimmediate>
+        <design:defaultflow xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:defaultflow>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[sequenceflow5]]></design:id>
+        <design:conditiontype xmlns:design="http://flowable.org/design"><![CDATA[None]]></design:conditiontype>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:showdiamondmarker xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:showdiamondmarker>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudsequenceflow]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[SequenceFlow]]></design:xmlTag>
+      </extensionElements>
+    </sequenceFlow>
+    <intermediateCatchEvent id="timerEvent">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudintermediatetimereventcatching]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[IntermediateTimerEvent]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["IntermediateTimerEvent"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:timeduration xmlns:design="http://flowable.org/design"><![CDATA[P1D]]></design:timeduration>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:trigger xmlns:design="http://flowable.org/design"><![CDATA[Timer]]></design:trigger>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[timerEvent]]></design:id>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudintermediatetimereventcatching]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[IntermediateTimerEvent]]></design:xmlTag>
+      </extensionElements>
+      <timerEventDefinition>
+        <timeDuration>P1D</timeDuration>
+      </timerEventDefinition>
+    </intermediateCatchEvent>
+    <sequenceFlow id="sequenceflow6" sourceRef="timerEvent" targetRef="_endnoneevent2">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudsequenceflow]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[SequenceFlow]]></design:stencilsuperid>
+        <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["SequenceFlow"]]]></design:stencilsuperids>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:isimmediate xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:isimmediate>
+        <design:defaultflow xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:defaultflow>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[sequenceflow6]]></design:id>
+        <design:conditiontype xmlns:design="http://flowable.org/design"><![CDATA[None]]></design:conditiontype>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:showdiamondmarker xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:showdiamondmarker>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[cloudsequenceflow]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.flowable.process.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[SequenceFlow]]></design:xmlTag>
+      </extensionElements>
+    </sequenceFlow>
+  </process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_integrationTestProcess">
+    <bpmndi:BPMNPlane bpmnElement="integrationTestProcess" id="BPMNPlane_integrationTestProcess">
+      <bpmndi:BPMNShape bpmnElement="startnoneevent1" id="BPMNShape_startnoneevent1">
+        <omgdc:Bounds height="30.0" width="30.0" x="117.0" y="261.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="synServiceTask" id="BPMNShape_synServiceTask">
+        <omgdc:Bounds height="80.0" width="100.0" x="211.0" y="236.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="asyncServiceTask" id="BPMNShape_asyncServiceTask">
+        <omgdc:Bounds height="80.0" width="100.0" x="360.0" y="236.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="_endnoneevent2" id="BPMNShape__endnoneevent2">
+        <omgdc:Bounds height="28.0" width="28.0" x="735.0" y="262.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="userTask" id="BPMNShape_userTask">
+        <omgdc:Bounds height="80.0" width="100.0" x="525.0" y="236.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape bpmnElement="timerEvent" id="BPMNShape_timerEvent">
+        <omgdc:Bounds height="30.0" width="30.0" x="670.0" y="261.0"></omgdc:Bounds>
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNEdge bpmnElement="sequenceflow2" id="BPMNEdge_sequenceflow2">
+        <omgdi:waypoint x="310.9499999998888" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="359.9999999998987" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceflow1" id="BPMNEdge_sequenceflow1">
+        <omgdi:waypoint x="146.94999890186838" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="211.0" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceflow4" id="BPMNEdge_sequenceflow4">
+        <omgdi:waypoint x="459.9499999998897" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="524.9999999999847" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceflow6" id="BPMNEdge_sequenceflow6">
+        <omgdi:waypoint x="699.9499955421524" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="735.0" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge bpmnElement="sequenceflow5" id="BPMNEdge_sequenceflow5">
+        <omgdi:waypoint x="624.9499999999362" y="276.0"></omgdi:waypoint>
+        <omgdi:waypoint x="670.0" y="276.0"></omgdi:waypoint>
+      </bpmndi:BPMNEdge>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</definitions>

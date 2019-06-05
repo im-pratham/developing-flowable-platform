@@ -2,13 +2,16 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-
-
+    <parent>
+        <groupId>com.flowable.training.dp</groupId>
+        <artifactId>developing-with-flowable-platform</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
 
     <artifactId>t55-custom-service-tasks-and-palettes-root</artifactId>
-    <groupId>com.flowable.training.dp</groupId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
+
     <modules>
         <module>app</module>
         <module>palette</module>

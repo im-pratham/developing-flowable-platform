@@ -11,13 +11,18 @@
 
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>t56-hooks-and-listeners</artifactId>
+    <artifactId>t32-testing-flowable-apps</artifactId>
 
     <dependencies>
         <dependency>
             <groupId>com.flowable.training.dp</groupId>
             <artifactId>flowable-work-autoconfig</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
         </dependency>
 
         <dependency>

@@ -12,10 +12,12 @@
 
     <modules>
         <module>0-flowable-work-base</module>
-        <module>1-flowable-design</module>
         <module>t42-hello-world</module>
+        <!--<module>1-flowable-design</module>-->
         <module>t55-custom-service-tasks-and-palettes</module>
         <module>t56-hooks-and-listeners</module>
+        <module>t32-testing-flowable-apps</module>
+        <module>0-flowable-work-autoconfig</module>
     </modules>
 
     <name>Developing with Flowable Platform</name>
