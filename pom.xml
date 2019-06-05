@@ -19,6 +19,7 @@
         <module>t32-testing-flowable-apps</module>
         <module>0-flowable-work-autoconfig</module>
         <module>t51-exception-handling</module>
+        <module>t22-integrate-with-externals-systems</module>
     </modules>
 
     <name>Developing with Flowable Platform</name>
