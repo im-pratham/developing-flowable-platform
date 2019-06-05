@@ -18,6 +18,7 @@
         <module>t56-hooks-and-listeners</module>
         <module>t32-testing-flowable-apps</module>
         <module>0-flowable-work-autoconfig</module>
+        <module>t51-exception-handling</module>
     </modules>
 
     <name>Developing with Flowable Platform</name>
@@ -29,7 +30,9 @@
         <java.version>1.8</java.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
         <flowable.version>3.1.2</flowable.version>
+        <awaitility.version>3.1.5</awaitility.version>
     </properties>
 
     <dependencyManagement>
@@ -40,6 +43,11 @@
                 <version>${flowable.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.awaitility</groupId>
+                <artifactId>awaitility</artifactId>
+                <version>${awaitility.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

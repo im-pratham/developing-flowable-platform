@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="http://www.omg.org/spec/CMMN/20151109/MODEL" xmlns:flowable="http://flowable.org/cmmn"
+             xmlns:cmmndi="http://www.omg.org/spec/CMMN/20151109/CMMNDI" xmlns:dc="http://www.omg.org/spec/CMMN/20151109/DC"
+             targetNamespace="http://flowable.org/cmmn">
+  <case id="test-case" name="TestCase" flowable:initiatorVariableName="initiator">
+    <casePlanModel id="onecaseplanmodel1" name="Case plan model" flowable:includeInStageOverview="false">
+      <extensionElements>
+        <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[onecaseplanmodel]]></design:stencilid>
+        <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[CasePlanModel]]></design:stencilsuperid>
+        <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+        <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+        <design:autocomplete xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:autocomplete>
+        <design:guid xmlns:design="http://flowable.org/design"><![CDATA[GEAR-e3898fa7-18d6-476d-95f1-72adfc38bdce]]></design:guid>
+        <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+        <design:name xmlns:design="http://flowable.org/design"><![CDATA[Case plan model]]></design:name>
+        <design:name_en_us xmlns:design="http://flowable.org/design"><![CDATA[Case plan model]]></design:name_en_us>
+        <design:id xmlns:design="http://flowable.org/design"><![CDATA[onecaseplanmodel1]]></design:id>
+        <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[onecaseplanmodel]]></design:customstencilid>
+        <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.case.palette.xml#]]></design:customnamespace>
+        <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[CasePlanModel]]></design:xmlTag>
+      </extensionElements>
+      <planItem id="planItem1" name="Human Task" definitionRef="onehumantask1">
+        <itemControl>
+          <manualActivationRule></manualActivationRule>
+        </itemControl>
+      </planItem>
+      <humanTask id="onehumantask1" name="Human Task" flowable:assignee="${initiator}">
+        <extensionElements>
+          <design:initiator-can-complete xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:initiator-can-complete>
+          <design:activiti-idm-initiator xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:activiti-idm-initiator>
+          <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[onehumantask]]></design:stencilid>
+          <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[HumanTask]]></design:stencilsuperid>
+          <design:stencilsuperids xmlns:design="http://flowable.org/design"><![CDATA[["Task","HumanTask"]]]></design:stencilsuperids>
+          <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:customstencil>
+          <design:guid xmlns:design="http://flowable.org/design"><![CDATA[GEAR-5a0ce0ba-722f-4d08-8f3d-bd1510945fb5]]></design:guid>
+          <design:completionneutral xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:completionneutral>
+          <design:isdiscretionary xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:isdiscretionary>
+          <design:isblocking xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:isblocking>
+          <design:assignee-run xmlns:design="http://flowable.org/design"><![CDATA[${initiator}]]></design:assignee-run>
+          <design:tasktype xmlns:design="http://flowable.org/design"><![CDATA[human]]></design:tasktype>
+          <design:repetitioncountervariablename xmlns:design="http://flowable.org/design"><![CDATA[repetitionCounter]]></design:repetitioncountervariablename>
+          <design:required xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:required>
+          <design:bordercolor xmlns:design="http://flowable.org/design"><![CDATA[#000000]]></design:bordercolor>
+          <design:bgcolor xmlns:design="http://flowable.org/design"><![CDATA[#ffffff]]></design:bgcolor>
+          <design:repetition xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:repetition>
+          <design:manualactivation xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:manualactivation>
+          <design:exclusive xmlns:design="http://flowable.org/design"><![CDATA[true]]></design:exclusive>
+          <design:async xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:async>
+          <design:id xmlns:design="http://flowable.org/design"><![CDATA[onehumantask1]]></design:id>
+          <design:name xmlns:design="http://flowable.org/design"><![CDATA[Human Task]]></design:name>
+          <design:name_en_us xmlns:design="http://flowable.org/design"><![CDATA[Human Task]]></design:name_en_us>
+          <design:customstencilid xmlns:design="http://flowable.org/design"><![CDATA[onehumantask]]></design:customstencilid>
+          <design:customnamespace xmlns:design="http://flowable.org/design"><![CDATA[http://b3mn.org/stencilset/default.case.palette.xml#]]></design:customnamespace>
+          <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[HumanTask]]></design:xmlTag>
+        </extensionElements>
+      </humanTask>
+    </casePlanModel>
+  </case>
+  <cmmndi:CMMNDI>
+    <cmmndi:CMMNDiagram id="CMMNDiagram_TestCase">
+      <cmmndi:CMMNShape id="CMMNShape_onecaseplanmodel1" cmmnElementRef="onecaseplanmodel1">
+        <dc:Bounds height="220.0" width="580.0" x="30.0" y="45.0"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+      <cmmndi:CMMNShape id="CMMNShape_planItem1" cmmnElementRef="planItem1">
+        <dc:Bounds height="80.0" width="100.0" x="90.0" y="115.0"></dc:Bounds>
+        <cmmndi:CMMNLabel></cmmndi:CMMNLabel>
+      </cmmndi:CMMNShape>
+    </cmmndi:CMMNDiagram>
+  </cmmndi:CMMNDI>
+</definitions>

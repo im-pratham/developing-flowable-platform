@@ -3,14 +3,14 @@
              xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:omgdc="http://www.omg.org/spec/DD/20100524/DC"
              xmlns:omgdi="http://www.omg.org/spec/DD/20100524/DI" typeLanguage="http://www.w3.org/2001/XMLSchema"
              expressionLanguage="http://www.w3.org/1999/XPath" targetNamespace="http://flowable.org/test">
-  <process id="integrationTestProcess" name="integration-test-process" isExecutable="true">
+  <process id="test-process" name="test-process" isExecutable="true">
     <extensionElements>
       <flowable:historyLevel xmlns:flowable="http://flowable.org/bpmn"><![CDATA[audit]]></flowable:historyLevel>
       <design:stencilid xmlns:design="http://flowable.org/design"><![CDATA[BPMNDiagram]]></design:stencilid>
       <design:stencilsuperid xmlns:design="http://flowable.org/design"><![CDATA[BPMNDiagram]]></design:stencilsuperid>
       <design:customstencil xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:customstencil>
-      <design:id xmlns:design="http://flowable.org/design"><![CDATA[integrationTestProcess]]></design:id>
-      <design:name xmlns:design="http://flowable.org/design"><![CDATA[integration-test-process]]></design:name>
+      <design:id xmlns:design="http://flowable.org/design"><![CDATA[TestProcess]]></design:id>
+      <design:name xmlns:design="http://flowable.org/design"><![CDATA[test-process]]></design:name>
       <design:guid xmlns:design="http://flowable.org/design"><![CDATA[PROCESS_MODEL-a9971c5d-9efa-4866-a429-54fba9e9bdb1]]></design:guid>
       <design:language xmlns:design="http://flowable.org/design"><![CDATA[English]]></design:language>
       <design:creationdate xmlns:design="http://flowable.org/design"><![CDATA[2019-06-05T08:19:38.734Z]]></design:creationdate>
@@ -24,7 +24,7 @@
       <design:process_historylevel xmlns:design="http://flowable.org/design"><![CDATA[audit]]></design:process_historylevel>
       <design:iseagerexecutionfetch xmlns:design="http://flowable.org/design"><![CDATA[false]]></design:iseagerexecutionfetch>
       <design:xmlTag xmlns:design="http://flowable.org/design"><![CDATA[BPMNDiagram]]></design:xmlTag>
-      <design:process_id xmlns:design="http://flowable.org/design"><![CDATA[integrationTestProcess]]></design:process_id>
+      <design:process_id xmlns:design="http://flowable.org/design"><![CDATA[TestProcess]]></design:process_id>
     </extensionElements>
     <startEvent id="startnoneevent1" flowable:initiator="initiator">
       <extensionElements>
@@ -254,8 +254,8 @@
       </extensionElements>
     </sequenceFlow>
   </process>
-  <bpmndi:BPMNDiagram id="BPMNDiagram_integrationTestProcess">
-    <bpmndi:BPMNPlane bpmnElement="integrationTestProcess" id="BPMNPlane_integrationTestProcess">
+  <bpmndi:BPMNDiagram id="BPMNDiagram_TestProcess">
+    <bpmndi:BPMNPlane bpmnElement="TestProcess" id="BPMNPlane_TestProcess">
       <bpmndi:BPMNShape bpmnElement="startnoneevent1" id="BPMNShape_startnoneevent1">
         <omgdc:Bounds height="30.0" width="30.0" x="117.0" y="261.0"></omgdc:Bounds>
       </bpmndi:BPMNShape>
