@@ -1,6 +1,8 @@
 package com.flowable.training.dp.t22;
 
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Stream;
 
 import javax.mail.MessagingException;
@@ -17,13 +19,18 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpMethod;
+import org.springframework.jms.annotation.EnableJms;
+import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
+import org.springframework.jms.config.JmsListenerContainerFactory;
+import org.springframework.jms.support.converter.MappingJackson2MessageConverter;
+import org.springframework.jms.support.converter.MessageConverter;
+import org.springframework.jms.support.converter.MessageType;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import com.icegreen.greenmail.util.GreenMail;
 import com.icegreen.greenmail.util.ServerSetup;
@@ -31,18 +38,18 @@ import com.icegreen.greenmail.util.ServerSetup;
 @SpringBootApplication(exclude = {
     FreeMarkerAutoConfiguration.class
 })
-@EnableWebMvc
 @EnableScheduling
+@EnableJms
 public class T22WorkApplication extends SpringBootServletInitializer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(T22WorkApplication.class);
 
+    @Autowired
+    private GreenMail greenMail;
+
     public static void main(String[] args) {
         SpringApplication.run(T22WorkApplication.class, args);
     }
-
-    @Autowired
-    private GreenMail greenMail;
 
     @Bean
     public GreenMail greenMail() {
@@ -60,15 +67,44 @@ public class T22WorkApplication extends SpringBootServletInitializer {
             return;
         }
 
-        Stream.of(receivedMessages).forEach(mime -> {
-            try {
-                LOGGER.info("Sent email '{}' from {} to {}", mime.getContent(), mime.getFrom(), mime.getAllRecipients());
-            } catch (IOException | MessagingException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        Set<String> messageIdsLogged = new HashSet<>();
+
+        Stream.of(receivedMessages)
+            .filter(m -> {
+                try {
+                    return !messageIdsLogged.contains(m.getMessageID());
+                } catch (MessagingException e) {
+                    throw new RuntimeException(e);
+                }
+            })
+            .forEach(mime -> {
+                try {
+                    LOGGER.info("Sent email '{}' from {} to {}", mime.getContent(), mime.getFrom(), mime.getAllRecipients());
+                    messageIdsLogged.add(mime.getMessageID());
+                } catch (IOException | MessagingException e) {
+                    throw new RuntimeException(e);
+                }
+            });
 
         greenMail.reset();
+    }
+
+    public static final String ORDER_QUEUE = "order-queue";
+    public static final String EXECUTED_ORDER_QUEUE = "executed-order-queue";
+
+    @Bean
+    public JmsListenerContainerFactory<?> queueListenerFactory() {
+        DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
+        factory.setMessageConverter(messageConverter());
+        return factory;
+    }
+
+    @Bean
+    public MessageConverter messageConverter() {
+        MappingJackson2MessageConverter converter = new MappingJackson2MessageConverter();
+        converter.setTargetType(MessageType.TEXT);
+        converter.setTypeIdPropertyName("_type");
+        return converter;
     }
 
     @Configuration
@@ -86,9 +122,9 @@ public class T22WorkApplication extends SpringBootServletInitializer {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS, apiUrl).permitAll(); // To allow for swagger's unauthorized OPTIONS requests
 
-                httpInBuild.antMatchers(apiUrl).permitAll();
-            }
-
+            httpInBuild.antMatchers(apiUrl).permitAll();
         }
+
+    }
 
 }

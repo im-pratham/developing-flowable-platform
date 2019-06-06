@@ -1,4 +1,4 @@
-package com.flowable.training.dp.t22;
+package com.flowable.training.dp.t22.symbols;
 
 import java.util.HashSet;
 import java.util.Set;

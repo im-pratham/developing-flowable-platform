@@ -1,4 +1,4 @@
-package com.flowable.training.dp.t22;
+package com.flowable.training.dp.t22.fraud;
 
 import java.math.BigDecimal;
 import java.util.Collections;
