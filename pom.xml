@@ -20,6 +20,8 @@
         <module>0-flowable-work-autoconfig</module>
         <module>t51-exception-handling</module>
         <module>t22-integrate-with-externals-systems</module>
+        <module>t61-cmmn-technical-foundations</module>
+        <module>t62-dmn-technical-foundations</module>
     </modules>
 
     <name>Developing with Flowable Platform</name>
