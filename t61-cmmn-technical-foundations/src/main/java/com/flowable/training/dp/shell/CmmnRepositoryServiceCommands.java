@@ -1,4 +1,4 @@
-package com.flowable.training.dp;
+package com.flowable.training.dp.shell;
 
 import java.io.IOException;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;
 
 @ShellComponent
-@ShellCommandGroup("Repository Service")
+@ShellCommandGroup("CMMN Repository Service")
 public class CmmnRepositoryServiceCommands {
 
     private final CmmnRepositoryService cmmnRepositoryService;

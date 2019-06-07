@@ -1,4 +1,4 @@
-package com.flowable.training.dp;
+package com.flowable.training.dp.shell;
 
 import java.io.IOException;
 import java.util.List;
@@ -19,7 +19,7 @@ import org.springframework.shell.standard.ShellMethod;
 import org.springframework.shell.standard.ShellOption;
 
 @ShellComponent
-@ShellCommandGroup("Repository Service")
+@ShellCommandGroup("CMMN Repository Service")
 public class CmmnRuntimeServiceCommands {
 
     private final CmmnRuntimeService cmmnRuntimeService;
@@ -38,6 +38,7 @@ public class CmmnRuntimeServiceCommands {
         return "Successfully created new case instance with ID " + caseInstance.getId();
     }
 
+    @ShellMethod(value = "List cases", key = "list-cases")
     public String listCases(String caseDefinitionKey) {
         StringBuilder message = new StringBuilder();
         List<CaseInstance> caseInstances = cmmnRuntimeService.createCaseInstanceQuery()
@@ -78,8 +79,8 @@ public class CmmnRuntimeServiceCommands {
 
     }
 
-    @ShellMethod(value = "Display variables", key = "display-case-variables")
-    public String displayVariables(String caseInstanceId) {
+    @ShellMethod(value = "List variables", key = "list-case-variables")
+    public String listCaseVariables(String caseInstanceId) {
         StringBuilder message = new StringBuilder();
 
         Map<String, Object> variables = cmmnRuntimeService.getVariables(caseInstanceId);
