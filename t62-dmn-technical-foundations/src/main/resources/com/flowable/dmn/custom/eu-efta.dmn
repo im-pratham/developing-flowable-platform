@@ -1,0 +1,284 @@
+<definitions xmlns="http://www.omg.org/spec/DMN/20151101" id="definition_DMN_MODEL-54813a4e-5bc7-4617-95aa-826c46378d26" name="LON-D01 EU EFTA Countries" namespace="http://www.flowable.org/dmn">
+  <decision id="eu-efta" name="LON-D01 EU EFTA Countries">
+    <decisionTable id="decisionTable_DMN_MODEL-ccf75da7-cb95-4754-9435-92311c05ffeb" hitPolicy="FIRST">
+      <input label="Nationality">
+        <inputExpression id="inputExpression_3" typeRef="string">
+          <text>country</text>
+        </inputExpression>
+      </input>
+      <output id="outputExpression_2" label="EU EFTA Country" name="euEftaCountry" typeRef="boolean"></output>
+      <rule>
+        <inputEntry id="inputEntry_3_1">
+          <text><![CDATA[== "Austria"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_1">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_2">
+          <text><![CDATA[== "Belgium"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_2">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_3">
+          <text><![CDATA[== "Bulgaria"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_3">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_4">
+          <text><![CDATA[== "Croatia"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_4">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_5">
+          <text><![CDATA[== "Cyprus"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_5">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_6">
+          <text><![CDATA[== "Czech Cepublic"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_6">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_7">
+          <text><![CDATA[== "Denmark"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_7">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_8">
+          <text><![CDATA[== "Estonia"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_8">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_9">
+          <text><![CDATA[== "Finland"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_9">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_10">
+          <text><![CDATA[== "France"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_10">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_11">
+          <text><![CDATA[== "Germany"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_11">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_12">
+          <text><![CDATA[== "Great Britain"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_12">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_13">
+          <text><![CDATA[== "Greece"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_13">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_14">
+          <text><![CDATA[== "Hungary"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_14">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_15">
+          <text><![CDATA[== "Ireland"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_15">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_16">
+          <text><![CDATA[== "Italy"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_16">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_17">
+          <text><![CDATA[== "Latvia"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_17">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_18">
+          <text><![CDATA[== "Lithuania"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_18">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_19">
+          <text><![CDATA[== "Luxembourg"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_19">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_20">
+          <text><![CDATA[== "Malta"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_20">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_21">
+          <text><![CDATA[== "Netherlands"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_21">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_22">
+          <text><![CDATA[== "Poland"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_22">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_23">
+          <text><![CDATA[== "Portugal"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_23">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_24">
+          <text><![CDATA[== "Romania"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_24">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_25">
+          <text><![CDATA[== "Slovakia"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_25">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_26">
+          <text><![CDATA[== "Slovenia"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_26">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_27">
+          <text><![CDATA[== "Spain"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_27">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_28">
+          <text><![CDATA[== "Sweden"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_28">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_29">
+          <text><![CDATA[== "Iceland"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_29">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_30">
+          <text><![CDATA[== "Norway"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_30">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_31">
+          <text><![CDATA[== "Principality of Liechtenstein"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_31">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_32">
+          <text><![CDATA[== "Switzerland"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_32">
+          <text><![CDATA[true]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_33">
+          <text><![CDATA[== "*"]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_33">
+          <text><![CDATA[false]]></text>
+        </outputEntry>
+      </rule>
+      <rule>
+        <inputEntry id="inputEntry_3_34">
+          <text><![CDATA[-]]></text>
+        </inputEntry>
+        <outputEntry id="outputEntry_2_34">
+          <text><![CDATA[false]]></text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+</definitions>
