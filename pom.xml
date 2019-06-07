@@ -22,6 +22,7 @@
         <module>t22-integrate-with-externals-systems</module>
         <module>t61-cmmn-technical-foundations</module>
         <module>t62-dmn-technical-foundations</module>
+        <module>t31-configuring-flowable</module>
     </modules>
 
     <name>Developing with Flowable Platform</name>
