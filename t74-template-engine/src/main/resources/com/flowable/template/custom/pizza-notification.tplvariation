@@ -1,0 +1,22 @@
+[
+  {
+    "variationKey": "body_de",
+    "templateDefinitionKey": "pizza-notification",
+    "variationContentResource": "classpath:/com/flowable/template/custom/pizza-notification-body-de.ftl"
+  },
+  {
+    "variationKey": "body_en",
+    "templateDefinitionKey": "pizza-notification",
+    "variationContentResource": "classpath:/com/flowable/template/custom/pizza-notification-body-en.ftl"
+  },
+  {
+    "variationKey": "subject_de",
+    "templateDefinitionKey": "pizza-notification",
+    "variationContentResource": "classpath:/com/flowable/template/custom/pizza-notification-subject-de.ftl"
+  },
+  {
+    "variationKey": "subject_en",
+    "templateDefinitionKey": "pizza-notification",
+    "variationContentResource": "classpath:/com/flowable/template/custom/pizza-notification-subject-en.ftl"
+  }
+]

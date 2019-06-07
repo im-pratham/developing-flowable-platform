@@ -23,6 +23,7 @@
         <module>t61-cmmn-technical-foundations</module>
         <module>t62-dmn-technical-foundations</module>
         <module>t31-configuring-flowable</module>
+        <module>t74-template-engine</module>
     </modules>
 
     <name>Developing with Flowable Platform</name>

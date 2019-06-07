@@ -1,0 +1,12 @@
+[
+  {
+    "variationKey": "de",
+    "templateDefinitionKey": "pizza-order-slip",
+    "variationContentResource": "classpath:/templates/pizza-order-slip-de.docx"
+  },
+  {
+      "variationKey": "en",
+      "templateDefinitionKey": "pizza-order-slip",
+      "variationContentResource": "classpath:/templates/pizza-order-slip-en.docx"
+  }
+]
