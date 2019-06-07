@@ -11,7 +11,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 public class T62WorkApplication extends SpringBootServletInitializer {
 
     public static void main(String[] args) {
-        SpringApplication.run(T42WorkApplication.class, args);
+        SpringApplication.run(T62WorkApplication.class, args);
     }
 
 }
