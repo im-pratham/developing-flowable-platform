@@ -1,0 +1,140 @@
+ACTIVITY_STARTED,startevent,B,"A
+  B"
+ACTIVITY_COMPLETED,startevent,B,"A
+  B"
+SEQUENCEFLOW_TAKEN,sequenceflow1,B,"A
+  B"
+ACTIVITY_STARTED,usertask1,B,"A
+  B"
+ACTIVITY_COMPLETED,usertask1,B,"A
+  C
+    D
+  E
+    F"
+SEQUENCEFLOW_TAKEN,sequenceflow2,B,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_STARTED,parallelgateway1,B,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_COMPLETED,parallelgateway1,B,"A
+  C
+    D
+  E
+    F"
+SEQUENCEFLOW_TAKEN,sequenceflow3,B,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_STARTED,subprocess1,C,"A
+  C
+    D
+  E
+    F"
+SEQUENCEFLOW_TAKEN,sequenceflow4,G,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_STARTED,subprocess2,E,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_STARTED,sub1startevent,D,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_STARTED,sub2startevent,F,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_COMPLETED,sub1startevent,D,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_COMPLETED,sub2startevent,F,"A
+  C
+    D
+  E
+    F"
+SEQUENCEFLOW_TAKEN,sequenceflow5,D,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_STARTED,sub1usertask,D,"A
+  C
+    D
+  E
+    F"
+SEQUENCEFLOW_TAKEN,sequenceflow7,F,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_STARTED,sub2usertask,F,"A
+  C
+    D
+  E
+    F"
+ACTIVITY_COMPLETED,sub1usertask,D,"A
+  E
+    F
+  H"
+SEQUENCEFLOW_TAKEN,sequenceflow6,D,"A
+  E
+    F
+  H"
+ACTIVITY_STARTED,sub1endevent,D,"A
+  E
+    F
+  H"
+ACTIVITY_COMPLETED,sub1endevent,D,"A
+  E
+    F
+  H"
+ACTIVITY_COMPLETED,subprocess1,C,"A
+  E
+    F
+  H"
+SEQUENCEFLOW_TAKEN,sequenceflow9,H,"A
+  E
+    F
+  H"
+ACTIVITY_STARTED,parallelgateway2,H,"A
+  E
+    F
+  H"
+ACTIVITY_COMPLETED,sub2usertask,F,"A
+  I"
+SEQUENCEFLOW_TAKEN,sequenceflow8,F,"A
+  I"
+ACTIVITY_STARTED,sub2endevent,F,"A
+  I"
+ACTIVITY_COMPLETED,sub2endevent,F,"A
+  I"
+ACTIVITY_COMPLETED,subprocess2,E,"A
+  I"
+SEQUENCEFLOW_TAKEN,sequenceflow10,I,"A
+  I"
+ACTIVITY_STARTED,parallelgateway2,I,"A
+  I"
+ACTIVITY_COMPLETED,parallelgateway2,I,"A
+  I"
+SEQUENCEFLOW_TAKEN,sequenceflow11,I,"A
+  I"
+ACTIVITY_STARTED,usertask2,I,"A
+  I"
+ACTIVITY_COMPLETED,usertask2,I,""
+SEQUENCEFLOW_TAKEN,sequenceflow12,I,""
+ACTIVITY_STARTED,endevent,I,""
+ACTIVITY_COMPLETED,endevent,I,""
