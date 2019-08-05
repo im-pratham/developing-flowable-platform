@@ -1,0 +1,42 @@
+{
+  "key": "employee-travel-request-origin-case",
+  "name": "employee-travel-request-origin-case",
+  "type": "query",
+  "sourceIndex": "case-instances",
+  "version": 1,
+  "parameters": {
+    "origin": "string"
+  },
+  "customFilter": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "caseDefinitionKey": "employeeTravelRequest"
+          }
+        },
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "extractedOrigin"
+                    }
+                  },
+                  {
+                    "match": {
+                      "variables.textValue": "{origin}"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

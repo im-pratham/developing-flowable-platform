@@ -1,0 +1,33 @@
+{
+  "key": "travel-request-alias",
+  "sourceIndex": "case-instances",
+  "type": "alias",
+  "version": 1,
+  "customFilter": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "caseDefinitionKey": "travelRequest"
+          }
+        },
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "origin"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

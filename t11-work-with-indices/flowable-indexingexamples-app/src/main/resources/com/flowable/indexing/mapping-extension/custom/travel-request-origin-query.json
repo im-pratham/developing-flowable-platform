@@ -1,0 +1,42 @@
+{
+  "key": "travel-request-origin-query",
+  "name": "travel-request-origin-query",
+  "type": "query",
+  "sourceIndex": "tasks",
+  "version": 1,
+  "parameters": {
+    "origin": "string"
+  },
+  "customFilter": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "scopeDefinitionKey": "travelRequest"
+          }
+        },
+        {
+          "nested": {
+            "path": "variables",
+            "query": {
+              "bool": {
+                "must": [
+                  {
+                    "term": {
+                      "variables.name": "origin"
+                    }
+                  },
+                  {
+                    "match": {
+                      "variables.textValue": "{origin}"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

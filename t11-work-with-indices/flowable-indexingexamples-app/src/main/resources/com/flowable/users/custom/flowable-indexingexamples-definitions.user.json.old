@@ -1,0 +1,175 @@
+[
+  {
+    "key": "admin-flowable",
+    "name": "Flowable Administration User",
+    "description": "Creates Flowable administration user.",
+    "initialUserSubType": "admin",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "flowableAdministrator",
+      "indexingExamplesUser",
+      "indexingExamplesAdministrator"
+    ],
+    "lookupGroups": [
+      "indexingExamplesUser"
+    ],
+    "actionPermissions": {
+      "create": [
+        "flowableAdministrator"
+      ],
+      "edit": [
+        "flowableAdministrator"
+      ],
+      "deactivate": [
+        "flowableAdministrator"
+      ],
+      "activate": [
+        "flowableAdministrator"
+      ]
+    },
+    "initialVariables": {
+      "adminUser": true,
+      "description": "Admin"
+    },
+    "conversationFilters": [
+      "all"
+    ],
+    "contactFilters": [
+      "all",
+      "active",
+      "inactive"
+    ],
+    "allowedFeatures": [
+      "contacts",
+      "editContactAvatar",
+      "changeOwnPassword",
+      "createUser",
+      "changeContactPassword",
+      "work",
+      "createWork",
+      "cases",
+      "processes",
+      "reports",
+      "reportsMetrics",
+      "tasks",
+      "templateManagement",
+      "actuators"
+    ]
+  },
+  {
+    "key": "admin-indexingExamples",
+    "name": "Flowable Indexing examples Administration User",
+    "description": "Creates a new Indexing examples Administration user.",
+    "initialUserSubType": "admin",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "flowableAdministrator",
+      "indexingExamplesUser",
+      "indexingExamplesAdministrator"
+    ],
+    "lookupGroups": [
+      "indexingExamplesUser"
+    ],
+    "actionPermissions": {
+      "create": [
+        "indexingExamplesAdministrator"
+      ],
+      "edit": [
+        "indexingExamplesAdministrator"
+      ],
+      "deactivate": [
+        "indexingExamplesAdministrator"
+      ],
+      "activate": [
+        "indexingExamplesAdministrator"
+      ]
+    },
+    "initialVariables": {
+      "adminUser": true,
+      "description": "Admin"
+    },
+    "conversationFilters": [
+      "all"
+    ],
+    "contactFilters": [
+      "all",
+      "active",
+      "inactive"
+    ],
+    "allowedFeatures": [
+      "contacts",
+      "editContactAvatar",
+      "changeOwnPassword",
+      "createUser",
+      "changeContactPassword",
+      "work",
+      "createWork",
+      "cases",
+      "processes",
+      "reports",
+      "reportsMetrics",
+      "tasks",
+      "templateManagement",
+      "actuators"
+    ]
+  },
+  {
+    "key": "user-indexingExamples",
+    "name": "Flowable Indexing examples User",
+    "description": "Creates a new, non-specific user where the member groups can be freely chosen.",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "indexingExamplesUser"
+    ],
+    "lookupGroups": [
+      "indexingExamplesUser"
+    ],
+    "actionPermissions": {
+      "create": [
+        "indexingExamplesAdministrator"
+      ],
+      "edit": [
+        "indexingExamplesAdministrator"
+      ],
+      "deactivate": [
+        "indexingExamplesAdministrator"
+      ],
+      "activate": [
+        "indexingExamplesAdministrator"
+      ]
+    },
+    "contactFilters": [
+      "active"
+    ],
+    "allowedFeatures": [
+      "contacts",
+      "editContactAvatar",
+      "changeOwnPassword",
+      "work",
+      "createWork",
+      "cases",
+      "tasks"
+    ]
+  }
+]
