@@ -1,76 +1,81 @@
-# Walk through Flowable Work Indexing
+# Flowable Work Indexing Tour
 
-In the following blog post, we are going to talk about how to use the new Flowable Work features to work with Elasticsearch. 
-Throughout it, we will explain, step by step, how to build a Flowable Work application that uses these features.
-In addition, we will describe how to build a Flow-App to generate custom dashboards.
+In the following blog post, we are going to talk about the Flowable Work integration with Elasticsearch. Throughout it, we will explain, step by step, how to build a Flowable Work application that uses this feature. In addition, we will describe how to build a Flow-App to generate custom dashboards. You can find a good introduction to the Elasticsearc integration architecture in [our documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#indexingArchitecture).
+
+This document was written with the following software versions:
+
+* Java 8
+* Elasticsearch 6.2.4
+* Postgresql 10
+* Flowable Work 3.2.2
+* Flowable Design 3.2.0
+* Flowable Control 3.2.1
+
+Also, to visualize the Elasticsearch indices we are going to use two tools: [Elasticsearc Head](https://github.com/tobias74/elasticsearch-head) and [Dejavu](https://github.com/appbaseio/dejavu).
 
 ## Starting with Flowable Work: Initializr
 
-The best way to start a flowable project is to use the [initializr](https://initializr.flowable.io/).
+The best way to start a new flowable project is to use the [Flowable Initializr](https://initializr.flowable.io/).
 
 ![initializr]
 
-As other initializers, Flowable Initializr will generate a maven project with a structure and minimum content necessary to run a Hello World.
+As other initializers, the Flowable Initializr will generate a maven project with a structure and minimum content necessary to run a Hello World.
 Just fill in the fields and download the project clicking on *"Get Project"* button.
 
-### Basic configuration
-
-The project generated has everything you need to run a Hello World.
-
-![projectStructure]
-
-**Docker folder:** It contains a docker compose file with PostgreSQL, Elasticsearch OSS, Flowable Design and Flowable Control. We have added a Kibana OSS to work with Elasticsearch. The use of Kibana is completely optional and is not required for the startup.
+The generated project generated has everything you need to run a Hello World. The first thing that you need is to run the docker compose file included in the project. The docker compose file includes a PostgreSQL instance, an Elasticsearch OSS node, Flowable Design and Flowable Control.
 
 ![diagram]
 
+To run the project, first, you need to run the docker-compose file. Then, you'll need to run the Spring Boot Application. Once everything is up'n'running, you will find the servers in the following URLS:
+
+- http://localhost:8090 - Flowable Work (admin:test)
+- http://localhost:8091 - Flowable Design (admin:test)
+- http://localhost:8092 - Flowable Control (admin:test)
+- http://localhost:1358 - Dejavu - Elasticsearch data browser
+- http://localhost:9100 - Elasticsearch Head - Elasticsearch Admin console
+
 ## Default Flowable features
 
-Flowable Work creates the indices *work*, *case-instances*, *tasks*, *users*, *plan-items* and *activities*.
+So far, we haven't developed anything yet but it's time to play around with "out of the shelf" Flowable Work indexing features ;)
 
-![defaultIndices]
+Flowable Work creates the following aliases and indices
+
+| Alias                                 | Index                                                         |
+| ------------------------------------- | ------------------------------------------------------------- |
+| flowableworkindexingtasks             | flowableworkindexingtasks-YYYYMMDD-HHMM-SS-ssssss             |
+| flowableworkindexingplan-items        | flowableworkindexingplan-items-YYYYMMDD-HHMM-SS-ssssss        |
+| flowableworkindexingactivities        | flowableworkindexingactivities-YYYYMMDD-HHMM-SS-ssssss        |
+| flowableworkindexingprocess-instances | flowableworkindexingprocess-instances-YYYYMMDD-HHMM-SS-ssssss |
+| flowableworkindexingusers             | flowableworkindexingusers-YYYYMMDD-HHMM-SS-ssssss             |
+| flowableworkindexingcase-instances    | flowableworkindexingcase-instances-YYYYMMDD-HHMM-SS-ssssss    |
+| flowableworkindexingwork              | flowableworkindexingwork-YYYYMMDD-HHMM-SS-ssssss              |
+
+The indices are created with a timestamp suffix and an alias is associated to each of them. The alias is used to reference the data. The index timestamp suffix allows the creation of different indices with the same dataset, for instance, during a reindexing process. At the end of the reindexing process, the alias is switched to the new process allowing a seamless transition.
 
 Flowable Work exposes some endpoints to consume the information stored in elasticsearch.
 
-- **Work:** /platform-api/search/query-work-instances
-- **Cases:** /platform-api/search/query-case-instances
-- **Process:** /platform-api/search/query-process-instances
-- **Tasks:** /platform-api/search/query-tasks
+- **Work:** [/platform-api/search/query-work-instances](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Work%20instances/searchWorkInstancesWithQuery)
+- **Cases:** [/platform-api/search/query-case-instances](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Case%20instances/customSearchCaseInstancesWithQuery)
+- **Process:** [/platform-api/search/query-process-instances](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Process%20instances/searchProcessInstancesWithQuery)
+- **Tasks:** [/platform-api/search/query-tasks](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Tasks/customSearchTasksWithQuery)
 
-The endpoints send a standard json response with a predefined format by Flowable Work. An example of how this response can be overwritten is shown below.
+Right now, there is a bug in the documentation of the endpoints. The parameters are documented as "body" values for the request but they are GET requests. The fields that are shown in the body can be used as query parameters. For instance:
+
+```
+http://localhost:8090/platform-api/search/query-tasks?completed=false&caseDefinitionName=Simple%20Case
+```
+
+The endpoints return a standard json response with a predefined format by Flowable Work. An example of how this response can be overwritten is shown below.
+
+Also, for every index there is [a POST endpoint](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/User%20Admin) available to trigger the reindexation process. 
 
 You can obtain more information about this topic in the [official documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html).
 
 ## Building Indexing Flowable Work Application
 
-At the moment, we haven't developed anything yet. It's time to play around with Flowable Work features ;)
+We will use a very simple Flowable app. It's just a case and a human task.
 
-To explain these features we need to create an App and use it as deployment unit. This means that the app is a container where the processes, cases and tasks will be deployed.
-We will explain more about this later.
-
-In this case, we are going to use two apps: the first one is *Flowable Platform Example Apps*. They are a group of applications that can be used as samples.
-For using them, we will add their maven dependencies:
-
-```xml
-    <!-- Default models and example apps -->
-        <dependency>
-            <groupId>com.flowable.platform</groupId>
-            <artifactId>flowable-platform-default-models</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.flowable.platform</groupId>
-            <artifactId>flowable-platform-default-idm-models</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.flowable.platform</groupId>
-            <artifactId>flowable-platform-example-apps</artifactId>
-        </dependency>
-```
-
-With this, we can now use these sample applications. For this demo, we will use Travel Request App.
-
-![travelExampleApp]
-
-It's a good example because Travel Request App has a form with all information of the travel. When the case is created, Flowable Work starts a process to save the information in elasticsearch.
+When the case is created, Flowable Work starts a process to save the information in elasticsearch.
 
 The saved data looks like this:
 
@@ -119,10 +124,6 @@ The saved data looks like this:
 Flowable Work extracts the form variables information and creates a child inside the variables object. This process is very important because thanks to it, we will be able to do different queries on any variable. 
 
 However, it is very common that we want to extract some components to be reused in another part of the application. For this reason, often sub-forms appear inside a form.  
-
-To show this case of use with an example, we have created a new app with Flowable Design. It's a very simple app modeled with a case and a human task. 
-
-![employeeInformation_model]
 
 Now, the human task has a form with the employee information and the form contains a sub-form with origin and destination travel information. When a case is created, the information is stored in elasticsearch like this:
 
@@ -632,16 +633,6 @@ Probably, these concepts are a good point to continue.
 <!-- Initializr -->
 [initializr]: img/initializr/initializr.png
 [diagram]: img/initializr/ArchitectureDiagram.png
-
-<!-- Main Configuration -->
-[projectStructure]: img/main-conf/projectStructure.png
-[kibanaOrigin]: img/main-conf/kibanaOrigin.png
-[kibanaDestination]: img/main-conf/kibanaDestination.png
-[defaultIndices]: img/main-conf/defaultIndices.png
-
-<!-- Work Application -->
-[employeeInformation_model]: img/work-app/sampleEmployeeApp.png
-[travelExampleApp]: img/work-app/travelRequestExampleApp.png
 
 <!-- Building App -->
 [createApp]: img/building-app/createApp.png
