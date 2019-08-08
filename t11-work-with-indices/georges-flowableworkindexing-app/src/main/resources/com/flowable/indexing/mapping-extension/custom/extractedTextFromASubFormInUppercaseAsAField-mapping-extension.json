@@ -1,0 +1,10 @@
+{
+    "key": "extractedTextFromASubFormInUppercaseAsAField-mapping-extension",
+    "extends": "tasks",
+    "version": 1,
+    "properties": {
+        "extractedTextFromASubFormInUppercaseAsAField": {
+            "type": "text"
+        }
+    }
+}

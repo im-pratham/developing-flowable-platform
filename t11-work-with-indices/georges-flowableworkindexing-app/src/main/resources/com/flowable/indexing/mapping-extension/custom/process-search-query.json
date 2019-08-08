@@ -1,0 +1,37 @@
+{
+    "key": "process-search-query",
+    "sourceIndex": "process-instances",
+    "type": "query",
+    "version": 1,
+    "parameters": {
+        "aTextValue": "string"
+    },
+    "customFilter": {
+        "bool": {
+            "must": [{
+                    "term": {
+                        "processDefinitionKey": "aProcess"
+                    }
+                },
+                {
+                    "nested": {
+                        "path": "variables",
+                        "query": {
+                            "bool": {
+                                "must": [{
+                                    "term": {
+                                        "variables.name": "aText"
+                                    }
+                                }, {
+                                    "prefix": {
+                                        "variables.textValue": "{aTextValue}"
+                                    }
+                                }]
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

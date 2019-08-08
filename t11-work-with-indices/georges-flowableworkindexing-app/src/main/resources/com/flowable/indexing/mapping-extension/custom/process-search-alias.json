@@ -1,0 +1,30 @@
+{
+    "key": "process-search-alias",
+    "sourceIndex": "process-instances",
+    "type": "alias",
+    "version": 1,
+    "customFilter": {
+        "bool": {
+            "must": [{
+                    "term": {
+                        "processDefinitionKey": "aProcess"
+                    }
+                },
+                {
+                    "nested": {
+                        "path": "variables",
+                        "query": {
+                            "bool": {
+                                "must": [{
+                                    "term": {
+                                        "variables.name": "aText"
+                                    }
+                                }]
+                            }
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

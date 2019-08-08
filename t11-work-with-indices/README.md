@@ -1,4 +1,4 @@
-# Flowable Indexing examples Flowable Work
+# Georges Flowable Work Indexing Flowable Work
 
 ## Setting up the needed Infrastructure
 Please check the following links on how to setup the infrastructure for Flowable manually without
@@ -14,7 +14,7 @@ Do not forget to set the deployment and cluster address properties of Design and
 For an easier setup with help of Docker check chapter [Setting up the needed Infrastructure with Docker](#Setting up the needed Infrastructure with Docker).
 
 ## Starting the project
-Afterwards you can start the Spring Boot application defined in `com.flowable.indexingexamples.FlowableIndexingExamplesApplication`. In order to achieve this,
+Afterwards you can start the Spring Boot application defined in `com.georges.flowableworkindexing.GeorgesFlowableWorkIndexingApplication`. In order to achieve this,
 you can build the executable war file with maven and execute `java -jar` pointing to the built war or create a new IDE Run Configuration. 
 Then open `http://localhost:8090` in the browser and use one of the users specified below in this document.
 
@@ -54,8 +54,8 @@ BE CAREFUL AS WITH THIS YOU WILL LOOSE ALL YOUR DATA STORED IN THE DATABASE AND 
 | User | User Definition Key | Login | Password |
 | -------------| ------------- | ------------- | ------------- |
 | Flowable Administrator | admin-flowable | admin | test |
-| Indexing examples Administrator | admin-indexingExamples | indexingExamples.admin | test |
-| Indexing examples User | user-indexingExamples | indexingExamples.user | test |
+| Flowable Work Indexing Administrator | admin-flowableWorkIndexing | flowableWorkIndexing.admin | test |
+| Flowable Work Indexing User | user-flowableWorkIndexing | flowableWorkIndexing.user | test |
 
 ## Change Log
 

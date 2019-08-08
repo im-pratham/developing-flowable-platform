@@ -1,6 +1,10 @@
 # Flowable Work Indexing Tour
 
-In the following blog post, we are going to talk about the Flowable Work integration with Elasticsearch (ES from now on). We will explain, step by step, how to build a Flowable Work application that uses this feature. In addition, we will describe how to build a Flow-App to generate custom dashboards. You can find a good introduction to the ES integration architecture in [our documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#indexingArchitecture).
+In the following blog post, we are going to talk about the Flowable Work integration with Elasticsearch (ES from now on).
+
+We will explain, step by step, how to build a Flowable Work application with indexing customizations, custom aliases and dynamic queries. Also, we will describe how to create a Flowable Page that uses the dynamic query.
+
+For more advanced topics, you can have a look to [The Flowable Work Indexing documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#indexingArchitecture).
 
 This document was written with the following software versions:
 
@@ -17,28 +21,28 @@ Also, to visualize the ES indices we are going to use two tools: [Elasticsearch 
 
 The best way to start a new flowable project is to use the [Flowable Initializr](https://initializr.flowable.io/).
 
-![initializr]
+![initializr](img/initializr.png)
 
 As other initializers, the Flowable Initializr will generate a maven project with a structure and minimum content necessary to run a Hello World.
 Just fill in the fields and download the project clicking on *"Get Project"* button.
 
 The generated project generated has everything you need to run a Hello World. The first thing that you need is to run the docker compose file included in the project. The docker compose file includes a PostgreSQL instance, an ES OSS node, Flowable Design and Flowable Control.
 
-![diagram]
+![diagram](img/ArchitectureDiagram.png)
 
 To run the project, first, you need to run the docker-compose file. Then, you'll need to run the generated Flowable Work Spring Boot Application. Once everything is up'n'running, you will find the servers in the following URLS:
 
-- http://localhost:8090 - Flowable Work (admin:test)
-- http://localhost:8091 - Flowable Design (admin:test)
-- http://localhost:8092 - Flowable Control (admin:test)
-- http://localhost:1358 - Dejavu - ES data browser
-- http://localhost:9100 - Elasticsearch Head - ES Admin console
+* <http://localhost:8090/> - Flowable Work (admin:test)
+* <http://localhost:8091/> - Flowable Design (admin:test)
+* <http://localhost:8092/> - Flowable Control (admin:test)
+* <http://localhost:1358/> - Dejavu - ES data browser
+* <http://localhost:9100/> - Elasticsearch Head - ES Admin console
 
 ## Default Flowable features
 
-So far, we haven't developed anything yet but it's time to play around with "out of the shelf" Flowable Work indexing features ;)
+So far, we haven't developed anything yet but it's time to play around with the "out of the shelf" Flowable Work indexing features ;)
 
-Flowable Work creates the following aliases and indices
+Flowable Work creates the following aliases and indices:
 
 | Alias                                 | Index                                                         |
 | ------------------------------------- | ------------------------------------------------------------- |
@@ -54,16 +58,14 @@ The indices are created with a timestamp suffix and an alias is associated to ea
 
 Flowable Work exposes some endpoints to consume the information stored in ES.
 
-- **Work:** [/platform-api/search/query-work-instances](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Work%20instances/searchWorkInstancesWithQuery)
-- **Cases:** [/platform-api/search/query-case-instances](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Case%20instances/customSearchCaseInstancesWithQuery)
-- **Process:** [/platform-api/search/query-process-instances](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Process%20instances/searchProcessInstancesWithQuery)
-- **Tasks:** [/platform-api/search/query-tasks](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Tasks/customSearchTasksWithQuery)
+* **Work:** [/platform-api/search/query-work-instances](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Work%20instances/searchWorkInstancesWithQuery)
+* **Cases:** [/platform-api/search/query-case-instances](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Case%20instances/customSearchCaseInstancesWithQuery)
+* **Process:** [/platform-api/search/query-process-instances](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Process%20instances/searchProcessInstancesWithQuery)
+* **Tasks:** [/platform-api/search/query-tasks](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/Tasks/customSearchTasksWithQuery)
 
 Right now, there is a bug in the documentation of the endpoints. The parameters are documented as "body" values for the request but they are GET requests. The fields that are shown in the body can be used as query parameters. For instance:
 
-```
-http://localhost:8090/platform-api/search/query-tasks?completed=false&caseDefinitionName=Simple%20Case
-```
+<http://localhost:8090/platform-api/search/query-tasks?completed=false&caseDefinitionName=Simple%20Case/>
 
 The endpoints return a standard json response with a predefined format by Flowable Work. An example of how this response can be overwritten is shown below.
 
@@ -128,7 +130,7 @@ You can obtain more information about this topic in the [official documentation]
 
 ## Building Indexing Flowable Work Application
 
-We will use a very simple Flowable app. You will find it in folder `design-app` from the sources. 
+We will use a very simple Flowable app. You will find it in folder `design-app` from the sources.
 
 We will start with just a case with a human task associated to a form with two fields "foo" and "bar". When the case is created, Flowable Work starts a process to save the information in ES. The saved in  data looks like this:
 
@@ -147,7 +149,7 @@ We will start with just a case with a human task associated to a form with two f
         "caseDefinitionName": "Simple Case",
         "scopeDefinitionName": "Simple Case",
         "id": "TSK-cff3a065-b838-11e9-9521-723dcf61d880",
-//[...more fields ...]
+        //[...more fields ...]
         "variables": [
             {
                 "scopeId": "CAS-cff267de-b838-11e9-9521-723dcf61d880",
@@ -161,7 +163,7 @@ We will start with just a case with a human task associated to a form with two f
                 "type": "string",
                 "textValueKeyword": "admin"
             },
-//[...more variables ...]
+            //[...more variables ...]
             {
                 "scopeId": "TSK-cff3a065-b838-11e9-9521-723dcf61d880",
                 "scopeDefinitionId": "CAS-a72db2f0-b838-11e9-9521-723dcf61d880",
@@ -189,7 +191,7 @@ We will start with just a case with a human task associated to a form with two f
                 "textValueKeyword": "fooValue"
             }
         ],
-//[...more fields ...]
+        //[...more fields ...]
     }
 }
 ```
@@ -198,7 +200,7 @@ Flowable Work extracts the form variables information and stores this data insid
 
 ## Transforming JSON Variables into regular variables
 
-By default, when you use subforms, the variables of the subform are indexed inside a single JSON variable. This is the most efficient way to store a variable but it's not very helpful when you are searching for data. We will create a new Process (`aProcess`) with a task referncing a form with a subform. The following JSON shows how the variables are stored in ES:
+By default, when you use sub forms, the variables of the sub forms are indexed inside a single JSON variable. This is the most efficient way to store a variable but it's not very helpful when you are searching for data. We will create a new Process (`aProcess`) with a task referencing a form with a sub form. The following JSON shows how the variables are stored in ES:
 
 ```json
 {
@@ -210,10 +212,10 @@ By default, when you use subforms, the variables of the subform are indexed insi
     "_source": {
         "__flowableVersion": 2,
         "rootScopeId": "CAS-5e0e5d50-b92c-11e9-bf74-723dcf61d880",
-//[...more fields ...]
+        //[...more fields ...]
         "rootScopeDefinitionName": "Case with a Process with a Task with a Sub Form",
         "variables": [
-//[...more variables ...]
+            //[...more variables ...]
             {
                 "scopeId": "TSK-7736f27c-b92c-11e9-bf74-723dcf61d880",
                 "scopeDefinitionId": "PRC-aProcess:1:4bc3bf3f-b92c-11e9-bf74-723dcf61d880",
@@ -229,7 +231,7 @@ By default, when you use subforms, the variables of the subform are indexed insi
                 "type": "json"
             }
         ],
-//[...more fields ...]
+        //[...more fields ...]
     }
 }
 ```
@@ -262,7 +264,7 @@ To use this feature, you must create a json file in the path **/com/flowable/ind
 }
 ```
 
-Restart the project and create a new Process. Now, the result when ES document is saved is as shown below:
+Restart the project and create a new process. Now, the result when ES document is saved is as shown below:
 
 ```json
 {
@@ -278,17 +280,17 @@ Restart the project and create a new Process. Now, the result when ES document i
         "processDefinitionName": "A Process",
         "scopeDefinitionName": "A Process",
         "id": "TSK-6e43e0c2-b938-11e9-b217-723dcf61d880",
- //[...more fields ...]
+        //[...more fields ...]
         "taskModelName": "A Task",
         "rootScopeDefinitionName": "A Process",
         "variables": [
-//[...more variables ...]
+            //[...more variables ...]
             {
                 "scopeId": "TSK-6e43e0c2-b938-11e9-b217-723dcf61d880",
                 "scopeDefinitionId": "PRC-aProcess:1:4bc3bf3f-b92c-11e9-bf74-723dcf61d880",
                 "scopeDefinitionKey": "aProcess",
                 "scopeType": "task",
-                "rawValue": "{"aTextInASubForm":"This is a text is a sub form"}",
+                "rawValue": "{\"aTextInASubForm\":\"This is a text is a sub form\"}",
                 "jsonValue": {
                     "aTextInASubForm": "This is a text is a sub form"
                 },
@@ -311,7 +313,7 @@ Restart the project and create a new Process. Now, the result when ES document i
                 "textValueKeyword": "This is a text is a sub form"
             }
         ],
-//[...more fields ...]
+        //[...more fields ...]
     }
 }
 ```
@@ -320,9 +322,9 @@ As we can see in the json above, in addition to the json variable, now we can fi
 
 ## Advanced customization of the Flowable Work indices
 
-At the moment, we have worked with default data model, that is, we have not modified the ES indices. Sometimes, we will need some *"special"* field in ES. For instance, we might require a field that is calculated from an existing variable. This new field can be key to simplify the queries.
+At the moment, we have worked with default data model, that is, we have not modified the ES indices. Sometimes, we will need some *"special"* field in ES. For instance, we might require a field that is calculated from an existing variable. This new field can be the key to simplify the queries.
 
-In this case, the first step is add new properties to the index with a mapping extension file. We just have to add the properties section to a new json mapping-extension file. You can put this file next to the previous one.
+The first step is add new properties to the index with a mapping extension file. We just have to add the properties section to a new json mapping-extension file. You can put this file next to the previous one.
 
 ```json
 {
@@ -337,9 +339,9 @@ In this case, the first step is add new properties to the index with a mapping e
 }
 ```
 
-After defining the properties, we have to [provide the data](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#providing-data-for-mapping-extensions) by implementing the **PlatformIndexedDataEnhancer** interface or extending the **IndexedDataEnhancerAdapter**.
+After defining the properties, we have to [provide the data](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#providing-data-for-mapping-extensions) by implementing the `PlatformIndexedDataEnhancer` interface or extending the `IndexedDataEnhancerAdapter`.
 
-For our example we could do something like this:
+For our example we are going to extend the `IndexedDataEnhancerAdapter`.
 
 ```java
 @Component
@@ -367,7 +369,7 @@ public class CustomIndexedDataEnhancerAdapter extends IndexedDataEnhancerAdapter
 }
 ```
 
-Now, there is a new property at the end of the index: "extractedTextFromASubFormInUppercaseAsAField".
+Now, there is a new property with an absurdly long name at the end of the index: "extractedTextFromASubFormInUppercaseAsAField".
 
 ```json
 {
@@ -425,12 +427,7 @@ Now, there is a new property at the end of the index: "extractedTextFromASubForm
 
 ## Querying ES with aliases and dynamic queries
 
-So far, we have used the query-* REST endpoints of the Flowable REST API to query the index. Now, we are going to introduce two ways of doing queries: aliases and dynamic queries. The most significant differences between aliases and dynamic queries are:
-
-* Aliases do not allow the parameterization of queries. This means that the query of an alias will always be about a static value.
-However, dynamic queries are designed to fill this gap and it allows the parameterization of queries on ES.
-
-* On the other hand, aliases are stored in the metadata field of Elastisearch, while dynamic queries are generated on the fly. For this reason, version attribute in aliases is very important. At startup, Flowable will read all alias definitions (json file). If the key does not exist in ES it will be created but if the key already exists in ES, the version number will be checked. Aliases will only be updated in ES when the version number is higher.
+So far, we have used the query-* REST endpoints of the Flowable REST API to query the index. Now, we are going to introduce two ways of doing queries: aliases and dynamic queries. Aliases do not allow the parameterization of queries. This means that the query of an alias will always be about a static value. However, dynamic queries are designed to fill this gap and it allows the parameterization of queries on ES. The version attribute in aliases and queries is very important. At startup, Flowable will read all alias/query definitions (json file). If the key does not exist in ES it will be created but if the key already exists in ES, the version number will be checked. Aliases will only be updated in ES when the version number is higher.
 
 First, we are going to create an alias. We must create a JSON file in the same path as the mapping extensions.
 
@@ -456,10 +453,6 @@ First, we are going to create an alias. We must create a JSON file in the same p
                                     "term": {
                                         "variables.name": "aText"
                                     }
-                                }, {
-                                    "match": {
-                                        "variables.textValue": "qwedrftgyuiop"
-                                    }
                                 }]
                             }
                         }
@@ -471,7 +464,7 @@ First, we are going to create an alias. We must create a JSON file in the same p
 }
 ```
 
-Next, we are going to create a dynamic query based in the structure of the alias bellow. 
+Next, we are going to create a dynamic query based in the structure of the alias bellow.
 
 ```json
 {
@@ -499,7 +492,7 @@ Next, we are going to create a dynamic query based in the structure of the alias
                                         "variables.name": "aText"
                                     }
                                 }, {
-                                    "match": {
+                                    "prefix": {
                                         "variables.textValue": "{aTextValue}"
                                     }
                                 }]
@@ -517,127 +510,41 @@ The structure is very similar but this time we are adding the parameters that th
 
 After setting this files and restarting the project, we will be able to invoke the alias and the dynamic query with the following Flowable REST API URLs:
 
-* http://localhost:8090/platform-api/search/query-process-instances/alias/process-search-alias
-* http://localhost:8090/platform-api/search/query-process-instances/query/process-search-query?aTextValue=qwedrftgyuiop
+* <http://localhost:8090/platform-api/search/query-process-instances/alias/process-search-alias/>
+* <http://localhost:8090/platform-api/search/query-process-instances/query/process-search-query?aTextValue=qwedrftgyuiop/>
 
-For more information about aliases and dynamuic queries, you can take a look at the [official documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#indexingCustomAliases).
+Behind the scenes, Flowable Work is using aliases to the corresponding index. In this example, we now have two more aliases for the process-instances index.
 
-### Building sample application step by step
+![newAliases](img/newAliases.png)
 
-#### My first App
+The `process-search-alias` can be used "as-is" without Flowable Work. The `process-search-query` alias corresponding to the dynamic query cannot be used without Flowable Work because it contains the parameter reference in the filter criteria. This parameter reference cannot be handled by ES alone (it will return zero results).
 
-Well, once we have our queries ready, painting time begins ;) 
+For more information about aliases and dynamic queries, you can take a look at the [official documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#indexingCustomAliases).
 
-As we explained before, in Flowable, an application is as a container, that is, we can deploy process, cases, tasks, etc. in an App.
-We can use Flowable Design to create a new App Definition.
-If you want to read more about this topic, you can read the [official documentation](https://documentation.flowable.com/modeler-bpmn/3.2.0/01-bpmn-sample.html).
+## Using a Flowable Page to display the results of a query
 
-![createApp]
+We are going to use a Flowable Page to display the results of a query. The Page will contain a Text input and a Data table.
 
-The next step is to add our models (CMMN and Forms models) by clicking on *"edit included models"* button.
+![aNewPageDesign](img/aNewPageDesign.png)
 
-![includedCases]
+We need to set the data source `Query URL` property to "/platform-api/search/query-process-instances/query/process-search-query?aTextValue={{searchText}}" and the `Path` property to "data". The `Query URL` property is bound to the `{{searchText}}` variable so every time the variable changes, the Data table component will call the URL for new data.
 
-The result is something like this.
+![datasource](img/datasource.png)
 
-![casesAndModels]
+Finally, we need to set the columns of the Data table. We are going to show only a couple of fields and the value of the "aText" variable.
 
-In this way, we have linked our cases and forms with our application. To deploy our application inside Flowable Work just click on the publish App button. 
+![columns](img/columns.png)
 
-Now, we have a new application in our Flowable Work menu!
+When we include the new page in the application and we publish it, we will be able to see in the page all the processes that have an "aText" variable. When the page is displayed initially, the value of `{{searchText}}` is empty. The dynamic query is configured with a "prefix" criteria for the variable value so in absence of any prefix, all variable values match.
 
-![indexingWorkApp]
+![aNewPageWork](img/aNewPageWork.png)
 
-Of course, we can create cases with our custom forms.
+As soon as we start typing, we will see how the Data table gets effectively filtered.
 
-![employeeForm]
-
-##### Flow-App concept
-
-In addition to model cases, process, decision tables and forms with Flowable Design we can create Flow-Apps with custom dashboards.
-A [Flow-App](https://documentation.flowable.com/dev-guide/3.2.0/200-flow-app-with-design.html#creating-a-flow-app)
-is a specific type of application that provides Pages, which appear in the left menu of Flowable Work.
-A Page provides a dashboard view that can contain, for example, a list of open tasks, open case instances or some custom dashboard.
-
-In this example, we are going to create a Flow-App with two pages to show the cases of the Travel Request type.
-Also, we will use the ES queries (alias and dynamic query) to filter the dashboards.
-
-##### Creating our Flow-App
-
-The first page will have a dashboard with a travel request cases list, and it will be possible to filter by origin. All cases of Travel Request will be loaded at first. 
-In addition, the combo-box component will be filled with all possible values from ES.
-
-To implement this behavior, we have put two equal data table component. The first one will be visible when the origin filter is not active or we want to see all the origins. 
-The second data table will only be visible when we use the origin combo-box filter.
-
-![page1]
-
-To load the combo-box with the data from ES, we are going to use the alias that we have defined previously.
-
-![page1_alias]
-
-We are creating a query in ES and it will return all matching cases. 
-One problem with this approach is that if we have a high number of cases stored in ES, 
-the object returned will be very heavy. 
-
-To improve the application performance, we will change the approach. For this reason, we are going to create a new page 
-(similar to the previous one) and now, we will filter by the destination attribute.
-
-![page2_query]
-
-In this case, the Query URL attribute of select component has been configured with the previous dynamic query (destination dynamic query). In addition, we have enabled autocomplete query using **{{$searchText}}** variable on Query URL.
-A benefit of this approach is that, the component is creating queries in ES each time it's modified. The return objects are more lightweight and we have a greater performance.
-
-#### Using Flow-App in Flowable Work
-
-Finally, we publish the app and we can see the Flow-App on the left menu of Flowable Work.
-
-![flowApp]
+![aNewPageWorkFilterd](img/aNewPageWorkFiltered.png)
 
 ## Conclusions
-ES is a requirement of Flowable Work. In order to take advantage of this part of the architecture, Flowable exposes different features to work with ES.
-In this blog post, we have seen how to create simple queries and how to use them in examples. Other more advanced concepts, such as *Dynamic Queries with Templates* or *Reindenxig*, have been left out. 
-Probably, these concepts are a good point to continue.
 
-## Links
-### Indexing Application Example
-#### Apps
-[Flowable Work Indexing App](http://localhost:8090/flowable-work)
+In this blog post, we have seen how to create simple queries and how to use them in Flowable pages. Other more advanced concepts, such as *Dynamic Queries with Templates* have been left out of the scope of this post.
 
-[Flowable Design](http://localhost:8091)
-
-[Kibana](http://localhost:5601)
-
-#### Default Flowable Endpoints
-[Tasks Query](http://localhost:8090/flowable-work/platform-api/search/query-tasks)
-
-[Cases Query](http://localhost:8090/flowable-work/platform-api/search/query-case-instances)
-
-#### Alias Example
-[Alias Query](http://localhost:8090/flowable-work/platform-api/search/query-case-instances/alias/travel-request-alias)
-
-#### Dynamic Queries Example 
-[Custom Task Dynamic Query](http://localhost:8090/flowable-work/platform-api/search/query-tasks/query/travel-request-origin-query?origin=Spain)
-
-[Custom Case Dynamic Query](http://localhost:8090/flowable-work/platform-api/search/query-case-instances/query/travel-request-origin-case?origin=Spain)
-
----
-
-<!-- Images -->
-
-<!-- Initializr -->
-[initializr]: img/initializr/initializr.png
-[diagram]: img/initializr/ArchitectureDiagram.png
-
-<!-- Building App -->
-[createApp]: img/building-app/createApp.png
-[casesAndModels]: img/building-app/casesAndModels.png
-[includedCases]: img/building-app/includedCases.png
-[indexingWorkApp]: img/building-app/indeingTrainingWorkApp.png
-[employeeForm]: img/building-app/createEmployeeForm.png
-
-<!-- Building Flow-App -->
-[page1]: img/building-flow-app/page1.png
-[page1_alias]: img/building-flow-app/page1_alias.png
-[page2_query]: img/building-flow-app/page2_query.png
-[flowApp]: img/building-flow-app/flowApp.png
+Nevertheless, we hope that you find this tour useful to get a taste of how the ES integration works before getting into more complex scenarios.

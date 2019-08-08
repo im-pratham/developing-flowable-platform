@@ -1,5 +1,5 @@
 # Created by .ignore support plugin (hsz.mobi)
-target
+/target/
 .idea/
 ci/
 *.iml
@@ -7,6 +7,3 @@ ci/
 #docker
 docker/data/
 
-# VSCode
-.factorypath
-.vscode/

@@ -1,0 +1,19 @@
+{
+    "key": "aTextInASubForm-mapping-extension",
+    "extends": "tasks",
+    "version": 4,
+    "properties": {
+        "extractedTextFromASubForm": {
+            "type": "text"
+        }
+    },
+    "variableExtractors": [{
+        "filter": {
+            "name": "aSubForm",
+            "scopeDefinitionKey": "aProcess"
+        },
+        "path": "/aTextInASubForm",
+        "to": "extractedTextFromASubForm",
+        "type": "string"
+    }]
+}

@@ -9,6 +9,12 @@ It is totally save and intended that this file will be deleted after project gen
 
 ## Change Log
 
+### 0.2.1
+- Upgrade to Flowable 3.2.2
+
+### 0.2.0
+- Upgrade to Flowable 3.2.1
+
 ### 0.1.6
 - Added static resource configuration class to configure browser caching for static resources.
 

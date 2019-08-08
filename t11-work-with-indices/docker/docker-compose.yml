@@ -1,92 +1,101 @@
 version: '3.4'
 
 services:
-  #  flowable-db:
-  #    image: postgres:10
-  #    ports:
-  #      - 5432:5432
-  #    volumes:
-  #      - data_db:/var/lib/postgresql/data
-  #    environment:
-  #      - POSTGRES_DB=flowable
-  #      - POSTGRES_USER=flowable
-  #      - POSTGRES_PASSWORD=flowable
+  flowable-db:
+    image: postgres:10
+    ports:
+      - 5432:5432
+    volumes:
+      - data_db:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=flowable
+      - POSTGRES_USER=flowable
+      - POSTGRES_PASSWORD=flowable
 
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.2.4
     ports:
-    - 9300:9300
-    - 9200:9200
-    #    volumes:
-    #      - data_es:/usr/share/elasticsearch/data
+      - 9300:9300
+      - 9200:9200
+    volumes:
+      - data_es:/usr/share/elasticsearch/data
     environment:
-    - discovery.type=single-node
-    - node.name=flowable-node
-    - cluster.name=flowable-cluster
+      - discovery.type=single-node
+      - node.name=flowable-node
+      - cluster.name=flowable-cluster
+      - http.cors.allow-origin=http://localhost:1358,http://127.0.0.1:1358,http://localhost:9100,http://127.0.0.1:9100
+      - http.cors.enabled=true
+      - http.cors.allow-headers=X-Requested-With,X-Auth-Token,Content-Type,Content-Length,Authorization
+      - http.cors.allow-credentials=true
     ulimits:
       memlock:
         soft: -1
         hard: -1
-    networks:
-    - elk
-
-  kibana:
-    image: docker.elastic.co/kibana/kibana-oss:6.2.4
-    environment:
-      SERVER_NAME: kibana
-      ELASTICSEARCH_URL: http://elasticsearch:9200
+  
+  dejavu:
+    image: appbaseio/dejavu
     ports:
-    - "5601:5601"
-    networks:
-    - elk
+     - 1358:1358
+    links:
+      - elasticsearch
+  
+  headPlugin:
+    image: tobias74/elasticsearch-head:6
+    ports:
+      - 9100:9100
+
+  # kibana:
+  #   image: docker.elastic.co/kibana/kibana-oss:6.2.4
+  #   environment:
+  #     SERVER_NAME: kibana
+  #     ELASTICSEARCH_URL: http://elasticsearch:9200
+  #   ports:
+  #   - "5601:5601"
 
   # This image requires to login to the Flowable Docker Repo (docker login registry.edorasware.com)
   flowable-design:
     image: registry.edorasware.com/customers/flowable-platform/flowable-design:3.2.0
     ports:
-    - 8091:8080
+      - 8091:8080
     volumes:
-    - ~/.flowable/flowable.license:/root/.flowable/flowable.license:ro
+      - ~/.flowable/flowable.license:/root/.flowable/flowable.license:ro
     environment:
-    - FLOWABLE_MODELER_APP_DEPLOYMENT-API-URL=http://host.docker.internal:8090/flowable-work/app-api
-    #      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
-    #      - SPRING_DATASOURCE_URL=jdbc:postgresql://flowable-db:5432/flowable
-    #      - SPRING_DATASOURCE_USERNAME=flowable
-    #      - SPRING_DATASOURCE_PASSWORD=flowable
-    - FLOWABLE_COMMON_APP_IDM-ADMIN_USER=admin
-    - FLOWABLE_COMMON_APP_IDM-ADMIN_PASSWORD=test
-    - LOGGING_LEVEL_ROOT=info
-    - LOGGING_FILE=target/app.log
+      - FLOWABLE_MODELER_APP_DEPLOYMENT-API-URL=http://host.docker.internal:8090/app-api
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://flowable-db:5432/flowable
+      - SPRING_DATASOURCE_USERNAME=flowable
+      - SPRING_DATASOURCE_PASSWORD=flowable
+      - FLOWABLE_COMMON_APP_IDM-ADMIN_USER=admin
+      - FLOWABLE_COMMON_APP_IDM-ADMIN_PASSWORD=test
+      - LOGGING_LEVEL_ROOT=info
+      - LOGGING_FILE=target/app.log
     entrypoint:
-    - catalina.sh
-    - run
+      - catalina.sh
+      - run
 
   # This image requires to login to the Flowable Docker Repo (docker login registry.edorasware.com)
-#  flowable-control:
-#    image: registry.edorasware.com/customers/flowable-platform/flowable-control:3.1.0
-#    ports:
-#      - 8092:8080
-#    volumes:
-#      - ~/.flowable/flowable.license:/root/.flowable/flowable.license:ro
-#    environment:
-#      - FLOWABLE_CONTROL_APP_CLUSTER-CONFIG_SERVER-ADDRESS=http://host.docker.internal
-#      - FLOWABLE_CONTROL_APP_CLUSTER-CONFIG_CONTEXT-ROOT=/
-#      - FLOWABLE_CONTROL_APP_CLUSTER-CONFIG_PASSWORD=test
-#      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://flowable-db:5432/flowable
-#      - SPRING_DATASOURCE_USERNAME=flowable
-#      - SPRING_DATASOURCE_PASSWORD=flowable
-#      - FLOWABLE_COMMON_APP_IDM-ADMIN_USER=admin
-#      - FLOWABLE_COMMON_APP_IDM-ADMIN_PASSWORD=test
-#      - LOGGING_LEVEL_ROOT=info
-#      - LOGGING_FILE=target/app.log
-#    entrypoint:
-#      - catalina.sh
-#      - run
+  flowable-control:
+    image: registry.edorasware.com/customers/flowable-platform/flowable-control:3.2.1
+    ports:
+      - 8092:8080
+    volumes:
+      - ~/.flowable/flowable.license:/root/.flowable/flowable.license:ro
+    environment:
+      - FLOWABLE_CONTROL_APP_CLUSTER-CONFIG_SERVER-ADDRESS=http://host.docker.internal
+      - FLOWABLE_CONTROL_APP_CLUSTER-CONFIG_CONTEXT-ROOT=/
+      - FLOWABLE_CONTROL_APP_CLUSTER-CONFIG_PASSWORD=test
+      - SPRING_DATASOURCE_DRIVER-CLASS-NAME=org.postgresql.Driver
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://flowable-db:5432/flowable
+      - SPRING_DATASOURCE_USERNAME=flowable
+      - SPRING_DATASOURCE_PASSWORD=flowable
+      - FLOWABLE_COMMON_APP_IDM-ADMIN_USER=admin
+      - FLOWABLE_COMMON_APP_IDM-ADMIN_PASSWORD=test
+      - LOGGING_LEVEL_ROOT=info
+      - LOGGING_FILE=target/app.log
+    entrypoint:
+      - catalina.sh
+      - run
 
-#volumes:
-#  data_db:
-#  data_es:
-networks:
-  elk:
-    driver: bridge
+volumes:
+  data_db:
+  data_es:
