@@ -1,6 +1,6 @@
 # Flowable Work Indexing Tour
 
-In the following blog post, we are going to talk about the Flowable Work integration with Elasticsearch (ES from now on). Throughout it, we will explain, step by step, how to build a Flowable Work application that uses this feature. In addition, we will describe how to build a Flow-App to generate custom dashboards. You can find a good introduction to the Elasticsearc integration architecture in [our documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#indexingArchitecture).
+In the following blog post, we are going to talk about the Flowable Work integration with Elasticsearch (ES from now on). We will explain, step by step, how to build a Flowable Work application that uses this feature. In addition, we will describe how to build a Flow-App to generate custom dashboards. You can find a good introduction to the ES integration architecture in [our documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#indexingArchitecture).
 
 This document was written with the following software versions:
 
@@ -13,7 +13,7 @@ This document was written with the following software versions:
 
 Also, to visualize the ES indices we are going to use two tools: [Elasticsearch Head](https://github.com/tobias74/ES-head) and [Dejavu](https://github.com/appbaseio/dejavu).
 
-## Starting with Flowable Work: Initializr
+## Starting a Flowable Work project with the Flowable Initializr
 
 The best way to start a new flowable project is to use the [Flowable Initializr](https://initializr.flowable.io/).
 
@@ -26,7 +26,7 @@ The generated project generated has everything you need to run a Hello World. Th
 
 ![diagram]
 
-To run the project, first, you need to run the docker-compose file. Then, you'll need to run the Spring Boot Application. Once everything is up'n'running, you will find the servers in the following URLS:
+To run the project, first, you need to run the docker-compose file. Then, you'll need to run the generated Flowable Work Spring Boot Application. Once everything is up'n'running, you will find the servers in the following URLS:
 
 - http://localhost:8090 - Flowable Work (admin:test)
 - http://localhost:8091 - Flowable Design (admin:test)
@@ -67,13 +67,70 @@ http://localhost:8090/platform-api/search/query-tasks?completed=false&caseDefini
 
 The endpoints return a standard json response with a predefined format by Flowable Work. An example of how this response can be overwritten is shown below.
 
+```json
+{
+  "data" : [ {
+    "id" : "TSK-e01ad48d-b944-11e9-9bb3-723dcf61d880",
+    "assignee" : "admin",
+    "name" : "A Task",
+    "createTime" : "2019-08-07T20:55:08.023+02:00",
+    "priority" : 50,
+    "suspended" : false,
+    "scopeDefinitionId" : "PRC-aProcess:1:4bc3bf3f-b92c-11e9-bf74-723dcf61d880",
+    "scopeId" : "PRC-bd80a534-b944-11e9-9bb3-723dcf61d880",
+    "scopeType" : "bpmn",
+    "tenantId" : "",
+    "formKey" : "aForm",
+    "endTime" : "2019-08-07T20:56:54.788+02:00",
+    "executionId" : "PRC-e0188a97-b944-11e9-9bb3-723dcf61d880",
+    "processInstanceId" : "PRC-bd80a534-b944-11e9-9bb3-723dcf61d880",
+    "processDefinitionId" : "PRC-aProcess:1:4bc3bf3f-b92c-11e9-bf74-723dcf61d880",
+    "processDefinitionName" : "A Process",
+    "taskDefinitionId" : "formtask1",
+    "rootScopeId" : "PRC-bd80a534-b944-11e9-9bb3-723dcf61d880",
+    "rootScopeType" : "bpmn",
+    "rootScopeName" : null,
+    "rootScopeBusinessKey" : null,
+    "rootScopeDefinitionId" : "PRC-aProcess:1:4bc3bf3f-b92c-11e9-bf74-723dcf61d880",
+    "rootScopeDefinitionKey" : "aProcess",
+    "rootScopeDefinitionName" : "A Process",
+    "parentScopeId" : "PRC-bd80a534-b944-11e9-9bb3-723dcf61d880",
+    "parentScopeType" : "bpmn",
+    "parentScopeName" : null,
+    "parentScopeBusinessKey" : null,
+    "parentScopeDefinitionId" : "PRC-aProcess:1:4bc3bf3f-b92c-11e9-bf74-723dcf61d880",
+    "parentScopeDefinitionKey" : "aProcess",
+    "parentScopeDefinitionName" : "A Process",
+    "root" : {
+      "foo" : "fooValue",
+      "bar" : "barValue",
+      "form_aForm_outcome" : "COMPLETE",
+      "initiator" : "admin"
+    },
+    "parent" : {
+      "foo" : "fooValue",
+      "bar" : "barValue",
+      "form_aForm_outcome" : "COMPLETE",
+      "initiator" : "admin"
+    }
+  } ],
+  "total" : 1,
+  "start" : 0,
+  "sort" : "createTime",
+  "order" : "desc",
+  "size" : 1
+}
+```
+
 Also, for every index there is [a POST endpoint](https://documentation.flowable.com/appdev-swagger/3.2.0/_attachments/platform.html#/User%20Admin) available to trigger the reindexation process.
 
 You can obtain more information about this topic in the [official documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html).
 
 ## Building Indexing Flowable Work Application
 
-We will use a very simple Flowable app. It's just a case with a human task associated to a form with two fields "foo" and "bar". When the case is created, Flowable Work starts a process to save the information in ES. The saved in  data looks like this:
+We will use a very simple Flowable app. You will find it in folder `design-app` from the sources. 
+
+We will start with just a case with a human task associated to a form with two fields "foo" and "bar". When the case is created, Flowable Work starts a process to save the information in ES. The saved in  data looks like this:
 
 ```json
 {
@@ -141,9 +198,7 @@ Flowable Work extracts the form variables information and stores this data insid
 
 ## Transforming JSON Variables into regular variables
 
-By default, when you use subforms, the variables of the subform are indexed inside a single JSON variable. This is the most efficient way to store a variable but it's not very helpful when you are searching for data.
-
-When the form contains subforms, the variables are stored in ES this way:
+By default, when you use subforms, the variables of the subform are indexed inside a single JSON variable. This is the most efficient way to store a variable but it's not very helpful when you are searching for data. We will create a new Process (`aProcess`) with a task referncing a form with a subform. The following JSON shows how the variables are stored in ES:
 
 ```json
 {
@@ -207,7 +262,8 @@ To use this feature, you must create a json file in the path **/com/flowable/ind
 }
 ```
 
-Now, the result when ES document is saved is as shown below:
+Restart the project and create a new Process. Now, the result when ES document is saved is as shown below:
+
 ```json
 {
     "_index": "flowableworkindexingtasks-20190807-1720-24-62424242",
@@ -266,7 +322,7 @@ As we can see in the json above, in addition to the json variable, now we can fi
 
 At the moment, we have worked with default data model, that is, we have not modified the ES indices. Sometimes, we will need some *"special"* field in ES. For instance, we might require a field that is calculated from an existing variable. This new field can be key to simplify the queries.
 
-In this case, the first step is add new properties to the index with a mapping extension. We just have to add the properties section to a new json mapping-extension file.
+In this case, the first step is add new properties to the index with a mapping extension file. We just have to add the properties section to a new json mapping-extension file. You can put this file next to the previous one.
 
 ```json
 {
@@ -367,163 +423,104 @@ Now, there is a new property at the end of the index: "extractedTextFromASubForm
 }
 ```
 
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## Querying ES with aliases and dynamic queries
 
-#### Creating queries over ES
+So far, we have used the query-* REST endpoints of the Flowable REST API to query the index. Now, we are going to introduce two ways of doing queries: aliases and dynamic queries. The most significant differences between aliases and dynamic queries are:
 
-In this example, we have used aliases and dynamic queries. I you want read more about it, you can take 
-a look at the [official documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#indexingCustomAliases).
-
-Two of the most significant differences between aliases and dynamic queries are:
- 
-- Aliases do not allow the parameterization of queries. This means that the query of an alias will always be about a static value.
+* Aliases do not allow the parameterization of queries. This means that the query of an alias will always be about a static value.
 However, dynamic queries are designed to fill this gap and it allows the parameterization of queries on ES.
 
-- On the other hand, aliases are stored in the metadata field of Elastisearch, while dynamic queries are generated on the fly. For this reason, version attribute in aliases is very important 
-because at startup, Flowable will read all alias definitions (json file). If the key does not exist in ES it will be created 
-but if the key already exists in ES, the version number will be checked. 
-Aliases will only be updated in ES when the version number is higher.
+* On the other hand, aliases are stored in the metadata field of Elastisearch, while dynamic queries are generated on the fly. For this reason, version attribute in aliases is very important. At startup, Flowable will read all alias definitions (json file). If the key does not exist in ES it will be created but if the key already exists in ES, the version number will be checked. Aliases will only be updated in ES when the version number is higher.
 
-#### Alias and Dynamic queries examples
-In the example below we are creating a static query on *case-instances* index and the response will be all travel request cases with the origin attribute.
+First, we are going to create an alias. We must create a JSON file in the same path as the mapping extensions.
 
-    {
-      "key": "travel-request-alias",
-      "sourceIndex": "case-instances",
-      "type": "alias",
-      "version": 1,
-      "customFilter": {
+```json
+{
+    "key": "process-search-alias",
+    "sourceIndex": "process-instances",
+    "type": "alias",
+    "version": 1,
+    "customFilter": {
         "bool": {
-          "must": [
-            {
-              "term": {
-                "caseDefinitionKey": "travelRequest"
-              }
-            },
-            {
-              "nested": {
-                "path": "variables",
-                "query": {
-                  "bool": {
-                    "must": [
-                      {
-                        "term": {
-                          "variables.name": "origin"
+            "must": [{
+                    "term": {
+                        "processDefinitionKey": "aProcess"
+                    }
+                },
+                {
+                    "nested": {
+                        "path": "variables",
+                        "query": {
+                            "bool": {
+                                "must": [{
+                                    "term": {
+                                        "variables.name": "aText"
+                                    }
+                                }, {
+                                    "match": {
+                                        "variables.textValue": "qwedrftgyuiop"
+                                    }
+                                }]
+                            }
                         }
-                      }
-                    ]
-                  }
+                    }
                 }
-              }
-            }
-          ]
+            ]
         }
-      }
     }
+}
+```
 
-Conversely, we are creating a dynamic query in the example below. We can parameterize the query with origin or destination property.
+Next, we are going to create a dynamic query based in the structure of the alias bellow. 
 
-    {
-      "key": "travel-request-origin-case",
-      "name": "travel-request-origin-case",
-      "type": "query",
-      "sourceIndex": "case-instances",
-      "version": 1,
-      "parameters": {
-        "origin": "string"
-      },
-      "customFilter": {
+```json
+{
+    "key": "process-search-query",
+    "sourceIndex": "process-instances",
+    "type": "query",
+    "version": 1,
+    "parameters": {
+        "aTextValue": "string"
+    },
+    "customFilter": {
         "bool": {
-          "must": [
-            {
-              "term": {
-                "caseDefinitionKey": "travelRequest"
-              }
-            },
-            {
-              "nested": {
-                "path": "variables",
-                "query": {
-                  "bool": {
-                    "must": [
-                      {
-                        "term": {
-                          "variables.name": "origin"
+            "must": [{
+                    "term": {
+                        "processDefinitionKey": "aProcess"
+                    }
+                },
+                {
+                    "nested": {
+                        "path": "variables",
+                        "query": {
+                            "bool": {
+                                "must": [{
+                                    "term": {
+                                        "variables.name": "aText"
+                                    }
+                                }, {
+                                    "match": {
+                                        "variables.textValue": "{aTextValue}"
+                                    }
+                                }]
+                            }
                         }
-                      },
-                      {
-                        "match": {
-                          "variables.textValue": "{origin}"
-                        }
-                      }
-                    ]
-                  }
+                    }
                 }
-              }
-            }
-          ]
+            ]
         }
-      }
     }
-    
-    {
-      "key": "travel-request-destination-prefix-case",
-      "name": "travel-request-destination-prefix-case",
-      "type": "query",
-      "sourceIndex": "case-instances",
-      "version": 1,
-      "parameters": {
-        "destination": "string"
-      },
-      "customFilter": {
-        "bool": {
-          "must": [
-            {
-              "term": {
-                "caseDefinitionKey": "travelRequest"
-              }
-            },
-            {
-              "nested": {
-                "path": "variables",
-                "query": {
-                  "bool": {
-                    "must": [
-                      {
-                        "term": {
-                          "variables.name": "destination"
-                        }
-                      },
-                      {
-                        "prefix": {
-                          "variables.textValue": "{destination}"
-                        }
-                      }
-                    ]
-                  }
-                }
-              }
-            }
-          ]
-        }
-      }
-    }
+}
+```
 
-After defining the queries, we can invoke them using Flowable API Rest:
+The structure is very similar but this time we are adding the parameters that this dynamic query is going to accept.
 
-    /platform-api/search/query-case-instances/alias/travel-request-alias
-    
-    /query-case-instances/query/travel-request-origin-case?origin=Spain
+After setting this files and restarting the project, we will be able to invoke the alias and the dynamic query with the following Flowable REST API URLs:
 
+* http://localhost:8090/platform-api/search/query-process-instances/alias/process-search-alias
+* http://localhost:8090/platform-api/search/query-process-instances/query/process-search-query?aTextValue=qwedrftgyuiop
+
+For more information about aliases and dynamuic queries, you can take a look at the [official documentation](https://documentation.flowable.com/dev-guide/3.2.0/825-work-indexing.html#indexingCustomAliases).
 
 ### Building sample application step by step
 
