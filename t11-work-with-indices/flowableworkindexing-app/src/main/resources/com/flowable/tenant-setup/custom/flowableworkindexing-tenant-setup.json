@@ -1,0 +1,52 @@
+{
+    "name": "Flowable Work Indexing",
+    "groups": [{
+            "key": "flowableAdministrator",
+            "name": "Flowable Administrator"
+        },
+        {
+            "key": "flowableUser",
+            "name": "Flowable Flowable User"
+        },
+        {
+            "key": "flowableWorkIndexingAdministrator",
+            "name": "Flowable Work Indexing Administrator"
+        },
+        {
+            "key": "flowableWorkIndexingUser",
+            "name": "Flowable Work Indexing User"
+        },
+        {
+            "key": "employee",
+            "name": "Employee"
+        }
+    ],
+    "users": [{
+            "firstName": "Flowable",
+            "lastName": "Admin",
+            "login": "admin",
+            "email": "admin@example.com",
+            "language": "en",
+            "theme": "flowable",
+            "userDefinitionKey": "admin-flowable"
+        },
+        {
+            "firstName": "Flowable Work Indexing",
+            "lastName": "Admin",
+            "login": "flowableworkindexing.admin",
+            "email": "flowableworkindexing.admin@example.com",
+            "language": "en",
+            "theme": "flowable",
+            "userDefinitionKey": "admin-flowableWorkIndexing"
+        },
+        {
+            "firstName": "Flowable Work Indexing",
+            "lastName": "User",
+            "login": "flowableworkindexing.user",
+            "email": "flowableworkindexing.user@example.com",
+            "language": "en",
+            "theme": "flowable",
+            "userDefinitionKey": "user-flowableWorkIndexing"
+        }
+    ]
+}

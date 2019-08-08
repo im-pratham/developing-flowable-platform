@@ -4,8 +4,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.georges.flowableworkindexing</groupId>
-    <artifactId>georges-flowableworkindexing-parent</artifactId>
+    <groupId>com.flowable.training.indexing</groupId>
+    <artifactId>flowableworkindexing-parent</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
@@ -17,7 +17,7 @@
     </parent>
 
     <modules>
-        <module>georges-flowableworkindexing-app</module>
+        <module>flowableworkindexing-app</module>
     </modules>
 
     <properties>
