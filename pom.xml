@@ -12,7 +12,7 @@
 
     <modules>
         <module>0-flowable-work-base</module>
-        <module>t11-work-with-indices</module>
+        <module>t11-work-with-indices/flowableworkindexing-app</module>
         <module>t42-hello-world</module>
         <!--<module>1-flowable-design</module>-->
         <module>t55-custom-service-tasks-and-palettes</module>
