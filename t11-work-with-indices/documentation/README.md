@@ -28,7 +28,7 @@ Just fill in the fields and download the project clicking on *"Get Project"* but
 
 The generated project generated has everything you need to run a Hello World. The first thing that you need is to run the docker compose file included in the project. The docker compose file includes a PostgreSQL instance, an ES OSS node, Flowable Design and Flowable Control.
 
-![diagram](img/ArchitectureDiagram.png)
+![diagram](img/generalArchitectureDiagram.png)
 
 To run the project, first, you need to run the docker-compose file. Then, you'll need to run the generated Flowable Work Spring Boot Application. Once everything is up'n'running, you will find the servers in the following URLS:
 
