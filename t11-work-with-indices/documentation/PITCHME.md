@@ -7,18 +7,65 @@ title: Flowable Work Indexing
 # <!-- fit --> Flowable Work Indexing
 
 ---
-<!--
-header: Flowable Work Indexing
-paginate: true 
--->
----
 <style>
+
+section {
+    background: #fff url(img/background.png) no-repeat center center;
+  background-size: cover;
+  font-family: "Montserrat";
+}
+
 section.centeredSection {
   text-align: center;
 }
 
 section.smallerFont {
   font-size: 24px;
+}
+
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 200;
+  src: local('Montserrat ExtraLight'), local('Montserrat-ExtraLight'),
+       url('./fonts/montserrat-v12-latin-200.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v12-latin-200.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-300 - latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 300;
+  src: local('Montserrat Light'), local('Montserrat-Light'),
+       url('./fonts/montserrat-v12-latin-300.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v12-latin-300.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-regular - latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Montserrat Regular'), local('Montserrat-Regular'),
+       url('./fonts/montserrat-v12-latin-regular.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v12-latin-regular.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-500 - latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 500;
+  src: local('Montserrat Medium'), local('Montserrat-Medium'),
+       url('./fonts/montserrat-v12-latin-500.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v12-latin-500.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* montserrat-700 - latin */
+@font-face {
+  font-family: 'Montserrat';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Montserrat Bold'), local('Montserrat-Bold'),
+       url('./fonts/montserrat-v12-latin-700.woff2') format('woff2'), /* Chrome 26+, Opera 23+, Firefox 39+ */
+       url('./fonts/montserrat-v12-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 </style>
 
@@ -219,9 +266,9 @@ Variables are stored as a nested JSON document.
 
 ---
 
-## Variable propagation fruits example
+## Variable propagation fruits example :apple::pear::lemon::banana::strawberry::pineapple::orange::grapes::watermelon:
 
-Each fruit item has a (fruit) variable and the corresponding root and parent (fruit)variables.
+Each fruit item has a (fruit) variable and the corresponding root and parent (fruit) variables.
 
 ```text
 - 🍎 case        [🍎(s)]
@@ -232,7 +279,7 @@ Each fruit item has a (fruit) variable and the corresponding root and parent (fr
       - 🍍 task  [🍎(r),            🍌(p),🍍(s)]
   - 🍊 case      [🍎(r),🍎(p),🍊(s)]
     - 🍇 process [🍎(r),      🍊(p),🍇(s)]
-    - 🥝 task    [🍎(r),      🍊(p),🥝(s)]
+    - 🍉 task    [🍎(r),      🍊(p),🍉(s)]
 ```
 
 (r) → root, (p) → parent, (s) → self
@@ -313,12 +360,12 @@ _class: smallerFont
 -->
 
 1. A new index is created with a unique name.
-1. Data from the database tables are fetched in pages (multiple rows at once) and in parallel.
-1. Each page is processed, and the data from the tables is transformed into a job for the Flowable async executor. This action too, is parallelized.
-1. The async history executor now picks up the job and transforms the job into a bulk index request for Elasticsearch.
-1. Once Elasticsearch acknowledges the indexation, the job is deleted. In case some parts of the bulk index failed, a new job with the failing parts is created to be picked up and retried later.
-1. When all jobs have been processed, the alias is swapped to the index created in step 1.
-1. A new reindexing is now planned to catch any data that has been added, updated, or removed since the reindexing was triggered. This has no impact on users, as it runs asynchronously in the background, and the index was already swapped in step 6.
+2. Data from the database tables are fetched in pages (multiple rows at once) and in parallel.
+3. Each page is processed, and the data from the tables is transformed into a job for the Flowable async executor. This action too, is parallelized.
+4. The async history executor now picks up the job and transforms the job into a bulk index request for Elasticsearch.
+5. Once Elasticsearch acknowledges the indexation, the job is deleted. In case some parts of the bulk index failed, a new job with the failing parts is created to be picked up and retried later.
+6. When all jobs have been processed, the alias is swapped to the index created in step 1.
+7. A new reindexing is now planned to catch any data that has been added, updated, or removed since the reindexing was triggered. This has no impact on users, as it runs asynchronously in the background, and the index was already swapped in step 6.
 
 ---
 
