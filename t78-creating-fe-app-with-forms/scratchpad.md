@@ -100,4 +100,7 @@
         ```
 
 - Create a React App
-  - 
+  - npx create-react-app frontend
+  - Clean default App.js
+  - Include Flowable Forms component
+  - Initialize the form with static values
