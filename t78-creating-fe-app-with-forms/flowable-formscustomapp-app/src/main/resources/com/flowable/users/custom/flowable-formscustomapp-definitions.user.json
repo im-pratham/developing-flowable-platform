@@ -1,0 +1,141 @@
+[
+  {
+    "key": "admin-flowable",
+    "name": "Flowable Administration User",
+    "description": "Creates Flowable administration user.",
+    "initialUserSubType": "admin",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "flowableAdministrator",
+      "formsCustomAppUser",
+      "formsCustomAppAdministrator"
+    ],
+    "lookupGroups":[
+      "formsCustomAppUser"
+    ],
+    "actionPermissions": {
+      "create": [ "flowableAdministrator"],
+      "edit": [ "flowableAdministrator" ],
+      "deactivate": [ "flowableAdministrator" ],
+      "activate": [ "flowableAdministrator" ]
+    },
+    "initialVariables": {
+      "adminUser": true,
+      "description": "Admin"
+    },
+    "conversationFilters": [ "all" ],
+    "contactFilters": [ "all", "active", "inactive" ],
+    "allowedFeatures": [
+      "contacts",
+      "editContactAvatar",
+      "changeOwnPassword",
+      "createUser",
+      "changeContactPassword",
+      "work",
+      "createWork",
+      "cases",
+      "processes",
+      "reports",
+      "reportsMetrics",
+      "tasks",
+      "templateManagement",
+
+      "actuators"
+    ]
+  },
+
+  {
+    "key": "admin-formsCustomApp",
+    "name": "Flowable Forms Custom App Administration User",
+    "description": "Creates a new Forms Custom App Administration user.",
+    "initialUserSubType": "admin",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "flowableAdministrator",
+      "formsCustomAppUser",
+      "formsCustomAppAdministrator"
+    ],
+    "lookupGroups":[
+      "formsCustomAppUser"
+    ],
+    "actionPermissions": {
+      "create": [ "formsCustomAppAdministrator"],
+      "edit": [ "formsCustomAppAdministrator" ],
+      "deactivate": [ "formsCustomAppAdministrator" ],
+      "activate": [ "formsCustomAppAdministrator" ]
+    },
+    "initialVariables": {
+      "adminUser": true,
+      "description": "Admin"
+    },
+    "conversationFilters": [ "all" ],
+    "contactFilters": [ "all", "active", "inactive" ],
+    "allowedFeatures": [
+      "contacts",
+      "editContactAvatar",
+      "changeOwnPassword",
+      "createUser",
+      "changeContactPassword",
+      "work",
+      "createWork",
+      "cases",
+      "processes",
+      "reports",
+      "reportsMetrics",
+      "tasks",
+      "templateManagement",
+
+      "actuators"
+    ]
+  },
+
+  {
+    "key": "user-formsCustomApp",
+    "name": "Flowable Forms Custom App User",
+    "description": "Creates a new, non-specific user where the member groups can be freely chosen.",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "formsCustomAppUser"
+    ],
+    "lookupGroups":[
+      "formsCustomAppUser"
+    ],
+    "actionPermissions": {
+      "create": [ "formsCustomAppAdministrator" ],
+      "edit": [ "formsCustomAppAdministrator" ],
+      "deactivate": [ "formsCustomAppAdministrator" ],
+      "activate": [ "formsCustomAppAdministrator" ]
+    },
+    "contactFilters": [ "active" ],
+    "allowedFeatures": [
+      "contacts",
+      "editContactAvatar",
+      "changeOwnPassword",
+      "work",
+      "createWork",
+      "cases",
+      "tasks"
+    ]
+  }
+]

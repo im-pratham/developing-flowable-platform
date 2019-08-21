@@ -12,20 +12,21 @@
 
     <modules>
         <module>0-flowable-work-base</module>
-        <module>t11-work-with-indices/flowableworkindexing-app</module>
-        <module>t42-hello-world</module>
+        <module>0-flowable-work-autoconfig</module>
         <!--<module>1-flowable-design</module>-->
+        <module>t11-work-with-indices/flowableworkindexing-app</module>
+        <module>t22-integrate-with-externals-systems</module>
+        <module>t42-hello-world</module>
+        <module>t31-configuring-flowable</module>
+        <module>t32-testing-flowable-apps</module>
+        <module>t51-exception-handling</module>
         <module>t55-custom-service-tasks-and-palettes</module>
         <module>t56-hooks-and-listeners</module>
-        <module>t32-testing-flowable-apps</module>
-        <module>0-flowable-work-autoconfig</module>
-        <module>t51-exception-handling</module>
-        <module>t22-integrate-with-externals-systems</module>
+        <module>t60-bpmn-technical-foundations</module>
         <module>t61-cmmn-technical-foundations</module>
         <module>t62-dmn-technical-foundations</module>
-        <module>t31-configuring-flowable</module>
         <module>t74-template-engine</module>
-        <module>t60-bpmn-technical-foundations</module>
+        <module>t78-creating-fe-app-with-forms/flowable-formscustomapp-app</module>
     </modules>
 
     <name>Developing with Flowable Platform</name>

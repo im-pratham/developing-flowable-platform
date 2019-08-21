@@ -1,0 +1,50 @@
+{
+  "name": "Flowable Forms Custom App",
+  "groups": [
+    {
+      "key": "flowableAdministrator",
+      "name": "Flowable Administrator"
+    },
+    {
+      "key": "flowableUser",
+      "name": "Flowable Flowable User"
+    },
+    {
+      "key": "formsCustomAppAdministrator",
+      "name": "Flowable Forms Custom App Administrator"
+    },
+    {
+      "key": "formsCustomAppUser",
+      "name": "Flowable Forms Custom App User"
+    }
+  ],
+  "users": [
+    {
+      "firstName": "Flowable",
+      "lastName": "Admin",
+      "login": "admin",
+      "email": "admin@formscustomapp.flowable.com",
+      "language": "en",
+      "theme": "flowable",
+      "userDefinitionKey": "admin-flowable"
+    },
+    {
+      "firstName": "Forms Custom App",
+      "lastName": "Admin",
+      "login": "formscustomapp.admin",
+      "email": "formscustomapp.admin@formscustomapp.flowable.com",
+      "language": "en",
+      "theme": "flowable",
+      "userDefinitionKey": "admin-formsCustomApp"
+    },
+    {
+      "firstName": "Forms Custom App",
+      "lastName": "User",
+      "login": "formscustomapp.user",
+      "email": "formscustomapp.user@formscustomapp.flowable.com",
+      "language": "en",
+      "theme": "flowable",
+      "userDefinitionKey": "user-formsCustomApp"
+    }
+  ]
+}
