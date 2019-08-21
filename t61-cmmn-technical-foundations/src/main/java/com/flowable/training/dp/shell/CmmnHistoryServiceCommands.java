@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.flowable.cmmn.api.CmmnHistoryService;
 import org.flowable.cmmn.api.history.HistoricCaseInstance;
-import org.flowable.cmmn.api.runtime.CaseInstance;
 import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;

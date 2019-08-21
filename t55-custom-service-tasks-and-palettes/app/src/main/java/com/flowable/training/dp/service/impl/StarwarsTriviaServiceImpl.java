@@ -27,7 +27,7 @@ public class StarwarsTriviaServiceImpl implements StarwarsTriviaService {
     private static final String SWAPI_BASE_URL = "https://swapi.co/api/";
 
     private final RestTemplate restTemplate;
-    private final HttpEntity<List> httpEntity;
+    private final HttpEntity<List<?>> httpEntity;
 
     public StarwarsTriviaServiceImpl() {
         this.restTemplate = new RestTemplate();

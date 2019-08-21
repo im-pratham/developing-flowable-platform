@@ -5,18 +5,16 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import com.flowable.spring.boot.EngineConfigurationConfigurer;
+
 import org.flowable.common.engine.api.delegate.event.FlowableEvent;
 import org.flowable.common.engine.api.delegate.event.FlowableEventListener;
 import org.flowable.common.engine.impl.cfg.TransactionState;
 import org.flowable.engine.delegate.event.FlowableActivityEvent;
 import org.flowable.engine.delegate.event.FlowableSequenceFlowTakenEvent;
 import org.flowable.spring.SpringProcessEngineConfiguration;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-
-import com.flowable.spring.boot.EngineConfigurationConfigurer;
 
 @Configuration
 public class ExecutionTreeV6ListenersConfig implements EngineConfigurationConfigurer<SpringProcessEngineConfiguration> {
@@ -42,8 +40,6 @@ public class ExecutionTreeV6ListenersConfig implements EngineConfigurationConfig
     }
 
     private static final class EventLogger implements FlowableEventListener {
-
-        private static final Logger LOGGER = LoggerFactory.getLogger(EventLogger.class);
 
         private final ActivitiyEventListener activitiyEventListener;
 

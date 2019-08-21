@@ -23,7 +23,6 @@ public class CmmnRepositoryServiceCommands {
 
     @ShellMethod(value = "Deploy Case Model", key = "deploy")
     public String deployProcess(String resourcePath) {
-        StringBuilder message = new StringBuilder();
         ClassPathResource caseResource = new ClassPathResource(resourcePath);
 
         try {

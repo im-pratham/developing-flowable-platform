@@ -27,7 +27,7 @@ public class GetStarwarsTriviaTask extends AbstractPlatformTask {
         String targetVariable = getStringExtensionElementValue("targetVariable", extensionElementsContainer, variableContainer, "ERROR");
         String triviaType = getStringExtensionElementValue("triviaType", extensionElementsContainer, variableContainer, "ERROR");
 
-        List results = starwarsTriviaService.getTriviaByType(triviaType);
+        List<?> results = starwarsTriviaService.getTriviaByType(triviaType);
         JsonNode node = new ObjectMapper().convertValue(results, JsonNode.class);
 
         variableContainer.setVariable(targetVariable, node);

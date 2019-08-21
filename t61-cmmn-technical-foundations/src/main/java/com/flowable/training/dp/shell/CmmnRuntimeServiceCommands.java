@@ -1,18 +1,12 @@
 package com.flowable.training.dp.shell;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import org.flowable.cmmn.api.CmmnRuntimeService;
-import org.flowable.cmmn.api.repository.CaseDefinition;
-import org.flowable.cmmn.api.repository.CmmnDeployment;
 import org.flowable.cmmn.api.runtime.CaseInstance;
 import org.flowable.cmmn.api.runtime.PlanItemInstance;
 import org.flowable.cmmn.api.runtime.PlanItemInstanceQuery;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.shell.standard.ShellCommandGroup;
 import org.springframework.shell.standard.ShellComponent;
 import org.springframework.shell.standard.ShellMethod;

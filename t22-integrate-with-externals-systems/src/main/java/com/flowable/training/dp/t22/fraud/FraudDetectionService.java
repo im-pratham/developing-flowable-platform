@@ -13,8 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
 @Service
 public class FraudDetectionService implements TriggerableActivityBehavior, JavaDelegate {
 
@@ -25,11 +23,9 @@ public class FraudDetectionService implements TriggerableActivityBehavior, JavaD
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
 
     private final RuntimeService runtimeService;
-    private final ObjectMapper objectMapper;
 
-    public FraudDetectionService(RuntimeService runtimeService, ObjectMapper objectMapper) {
+    public FraudDetectionService(RuntimeService runtimeService) {
         this.runtimeService = runtimeService;
-        this.objectMapper = objectMapper;
     }
 
     @Override
