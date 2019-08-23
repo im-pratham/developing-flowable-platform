@@ -1,6 +1,7 @@
 # t78-creating-fe-app-with-forms steps
 
 - Create an app with the [initializr](https://initializr.flowable.io/)
+- Add cors configuration
 - Testing the app with spring-boot:run
 - Create a Simple App with a Simple Process and a Simple Form.
 - Export bar file and put it in the deployment folder.
@@ -60,6 +61,11 @@
         GET /platform-api/tasks/{{taskId}}/form HTTP/1.1
         ```
 
+  - Get the task (and process) variables
+
+    ```
+    ```
+
   - Save a Task
 
         ```
@@ -104,3 +110,8 @@
   - Clean default App.js
   - Include Flowable Forms component
   - Initialize the form with static values
+  - Get the form definition and the variables from a hardcoded task
+  - Put the form in a form container
+  - Get the Payload of the form from the REST API
+  - 
+
