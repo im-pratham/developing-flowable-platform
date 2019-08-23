@@ -30,6 +30,7 @@ function FormContainer(props) {
 
   const onOutcomePressed = (newPayload, outcomePressed) => {
     console.log("OUTCOME PRESSED", newPayload, outcomePressed);
+    setPayload(newPayload);
   }
 
   return (
