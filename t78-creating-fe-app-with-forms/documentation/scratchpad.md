@@ -88,7 +88,7 @@
         User-Agent: PostmanRuntime/7.15.2
         Accept: */*
         Cache-Control: no-cache
-        Postman-Token: 6e69d4de-0554-49ea-bf4e-a2cab38451d9,a4c95aea-4cec-4433-8249-be30d09f5d3b
+        Postman-Token: 6e69d4de-0554-49ea-bf4-a2cab38451d9,a4c95aea-4cec-4433-8249-be30d09f5d3b
         Host: localhost:8090
         Cookie: JSESSIONID=1614C8D1F2EE5021F826CC80B4E658D8
         Accept-Encoding: gzip, deflate
@@ -113,5 +113,9 @@
   - Get the form definition and the variables from a hardcoded task
   - Put the form in a form container
   - Get the Payload of the form from the REST API
-  - 
+  - Get the lists of tasks from the REST API
+  - Bind the list of tasks with the Form Container
+  
+
+  
 
