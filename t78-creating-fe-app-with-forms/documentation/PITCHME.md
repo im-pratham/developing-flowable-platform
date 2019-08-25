@@ -7,9 +7,17 @@ title: Flowable Work Indexing
 <style>
 
 section {
-    background: #fff url(img/background.png) no-repeat center center;
+  background: #fff url(img/background.png) no-repeat center center;
   background-size: cover;
   font-family: "Montserrat";
+}
+
+section.frontpage {
+  background: #fff url(img/sectionBackground.png) no-repeat center center;
+  background-size: cover;
+  font-family: "Montserrat";
+  font-size: 50px;
+  color: white;
 }
 
 section.centeredSection {
@@ -65,24 +73,26 @@ section.smallerFont {
        url('./fonts/montserrat-v12-latin-700.woff') format('woff'); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 </style>
+
 # <!-- fit --> Creating a React application with Flowable Forms
 
 ---
 
-# Flowable Forms introduction
+## Flowable Forms introduction
 
 - Flowable forms is Flowable's declarative forms library written in React.
 - Everything you need to know is available in https://forms.flowable.io
 - The online documentation lets you play with the library's components on-line with [Storybook](https://github.com/storybookjs/storybook).
 - The library can be downloaded from the Flowable NPM repository
 - The library is used by Flowable products like Flowable Work and Engage, in Flowable's customer solutions (projects) and also by other companies for their own projects.
-- The Product team is constantly maintaining and enhancing the library. Specially, following the customer's feedback.
-
+- The Product team is constantly maintaining and enhancing the library.
+  **Specially, following the customer's feedback**.
 
 ---
-# <!-- fit --> We are building form engines for 10 years.
 
---- 
+## <!-- fit --> We are building form engines for 10 years
+
+---
 
 ![bg cover](img/hideyourpainmeme.jpg)
 
@@ -98,18 +108,18 @@ Just... don't do it.
 
 ---
 
-# Version history
+## Version history
 
-|  alias  | Company | Technology | Timing | Status |
-| --- | --- | --- | --- | --- |
-| jsf engine | edorasware | JSF | ~2009 | Deprecated
-| form engine | edorasware | Angular 1.3 | 2010 - 2016 | Deprecated |
-| view engine | edorasware | Angular 1.5 | 2015 - now | Maintained |
-| Flowable Forms | Flowable |  React 16.6 | 2018 - now | Active |
+|  alias  | Technology | Timing | Status |
+| --- | --- | --- | --- |
+| jsf engine | JSF | ~2009 | Deprecated
+| form engine | Angular 1.3 | 2010 - 2016 | Deprecated |
+| view engine | Angular 1.5 | 2015 - now | Maintained |
+| Flowable Forms   |  React 16.6 | 2018 - now | Active |
 
 ---
 
-# Installation (1/2)
+## Installation (1/2)
 
 Configure ~/.npmrc
 
@@ -125,7 +135,7 @@ Choose Tool: NPM, Repository: libs-release-local-npm, and Insert your credential
 
 ---
 
-# Installation (2/2)
+## Installation (2/2)
 
 Copy the 3 lines from Basic Authentication section into your .npmrc file 
 
@@ -145,7 +155,7 @@ yarn add @flowable/forms
 
 ---
 
-# Usage with React
+## Usage with React
 
 ```javascript
 import {Form} from "@flowable/forms";
@@ -175,25 +185,68 @@ class App extends React.Component{
 
 ---
 
-# Usage without npm  or react
+## Usage without npm  or react
 
+- Flowable Forms provides an index-complete.js file that bundles all the dependencies.
+- When you load the index-complete.js file you will have available the flwforms global object. This object provides:
+  - render
+  - edorasAdapter
+  - utilities
 
+The  [render](https://forms.flowable.io/docs/start-vanilla.html#render) function renders a form in the dom element. In the props attribute you need to pass the config (form definition) and you can optionally pass any other prop in the Form props. It returns a Form so you can call any of the Form methods from there. 
 
 ---
-Expressions
-Outcomes
-Utilities library
-Events
-API
-DevTools
-Saving the payload
-Styles
-Custom Components
+
+## Expressions
+
+[Expressions](https://forms.flowable.io/docs/basic-expressions.html) are "calculations" that flowable forms can do for you. You can use expressions in most of the attributes used in form components. This allows you to bind components together and define form behavior. Expressions are wrapped in double curly braces {{}} and the engine will try to "calculate" them.
+
+Examples:
+
+```javascript
+{{$currentUser.id}}
+{{!disabled}}
+{{age > 5}}
+{{length == 5}}
+{{disabled || invisible}}
+{{age < 16 ? 'child' : 'adult'}}
+{{names.join(", ")}}
+{{colors.indexOf['red']}}
+```
+
+---
+
+## Outcomes
+
+- [Outcomes](https://forms.flowable.io/docs/basic-outcomes.html) are the main form actions. E.g.:
+
+![h:250](img/outcomes.png)
+
+- If the outcomes are not set, the default outcome is called "COMPLETE".
+- The form outcomes can be rendered outside of the form with the outcomesElement property that is passed to the <Form>.
+- You can disable or hide some outcomes when some conditions are met. For example `enabled: {{$formValid}}`.
+
+---
+
+## Other advanced topics
+
+- Datasource
+- Utilities library
+- Events
+- API
+- DevTools
+- Saving the payload
+- Styles
+- Custom Components
+- Custom fetch function
+- Localisation
+- Additional data
 
 ---
 ## Practical exercise
 
-//TODO
+- Spring Boot based Flowable Work application with a simple workflow to create tasks
+- React app that renders the list of pending tasks and the corresponding form
 
 ---
 <!--
