@@ -28,6 +28,7 @@
         <module>t62-dmn-technical-foundations</module>
         <module>t74-template-engine</module>
         <module>t78-creating-fe-app-with-forms/flowable-formscustomapp-app</module>
+        <module>t76-frontend-customization</module>
     </modules>
 
     <name>Developing with Flowable Platform</name>
