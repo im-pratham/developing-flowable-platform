@@ -1,7 +1,4 @@
 package com.flowable.training.dp.model;//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by Fernflower decompiler)
-//
 
 
 import java.util.ArrayList;
