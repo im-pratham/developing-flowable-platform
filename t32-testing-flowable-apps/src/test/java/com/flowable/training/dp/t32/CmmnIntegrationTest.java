@@ -8,10 +8,10 @@ import org.flowable.cmmn.engine.CmmnEngine;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.ActiveProfiles;
 
 @SpringBootTest(classes = { T32WorkApplication.class })
-@TestPropertySource("/application-test.properties")
+@ActiveProfiles("test")
 public class CmmnIntegrationTest {
 
     /**
