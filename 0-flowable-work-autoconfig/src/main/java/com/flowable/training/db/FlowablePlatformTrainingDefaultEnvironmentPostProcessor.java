@@ -1,5 +1,6 @@
 package com.flowable.training.db;
 
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.boot.SpringApplication;
@@ -21,7 +22,7 @@ class FlowablePlatformTrainingDefaultEnvironmentPostProcessor implements Environ
 
     public static final int DEFAULT_ORDER = ConfigFileApplicationListener.DEFAULT_ORDER + 999999;
 
-    private static final String DEFAULT_NAME = "flowable-platform-training-default";
+    private static final String[] DEFAULT_NAMES = new String[] { "flowable-platform-training-module", "flowable-platform-training-default" };
 
     private int order = DEFAULT_ORDER;
 
@@ -53,8 +54,7 @@ class FlowablePlatformTrainingDefaultEnvironmentPostProcessor implements Environ
         void load() {
             for (PropertySourceLoader loader : propertySourceLoaders) {
                 for (String extension : loader.getFileExtensions()) {
-                    String location = "classpath:/" + FlowablePlatformTrainingDefaultEnvironmentPostProcessor.DEFAULT_NAME + "." + extension;
-                    load(location, loader);
+                    Arrays.stream(DEFAULT_NAMES).map(name -> "classpath:/" + name + "." + extension).forEach(location -> load(location, loader));
                 }
             }
 
