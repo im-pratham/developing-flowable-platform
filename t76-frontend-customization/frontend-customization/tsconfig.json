@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "jsx": "react",
+    "module": "esNext",
+    "moduleResolution": "node",
+    "outDir": "./dist",
+    "preserveConstEnums": true,
+    "strict": true,
+    "strictFunctionTypes": false,
+    "target": "es5",
+    "sourceMap": true,
+    "importHelpers": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true
+  }
+}

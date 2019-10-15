@@ -1,0 +1,347 @@
+[
+  {
+    "key": "user-default",
+    "name": "Default, non-specific User",
+    "description": "Creates a new, non-specific user where the member groups can be freely chosen.",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser"
+    ],
+    "lookupGroups":[
+      "flowableUser"
+    ],
+    "actionPermissions": {
+      "create": [ "flowableAdministrator" ],
+      "edit": [ "flowableAdministrator" ],
+      "deactivate": [ "flowableAdministrator" ],
+      "activate": [ "flowableAdministrator" ]
+    },
+    "contactFilters": [ "ACTIVE" ],
+    "translations": {
+	"de_de": {
+		"name": "Standardbenutzer"
+	},
+	"es_es": {
+		"name": "Usuario predeterminado"
+	},
+	"it_it": {
+		"name": "Utente predefinito"
+	}
+    },
+    "allowedFeatures": [ "contacts", "bubbles", "markdownInput", "replyToMessage", "forwardMessage", "reactToMessage", "fileUpload", "work", "createWork",
+      "tasks", "documents", "changeOwnPassword", "editOwnAvatar"]
+  },
+  {
+    "key": "user-temporary",
+    "name": "A temporary user",
+    "description": "Creates a new, temporary user.",
+    "initialState": "INACTIVE",
+    "initialSubState": "TEMPORARY",
+    "initialUserType": "external",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser"
+    ],
+    "actionPermissions": {
+      "create": [ "flowableAdministrator" ],
+      "deactivate": [ "flowableAdministrator" ],
+      "activate": [ "flowableAdministrator" ]
+    },
+    "contactFilters": [ "ACTIVE" ],
+    "allowedFeatures": [ "contacts" ]
+  },
+
+  {
+    "key": "user-client-advisor",
+    "name": "Client Advisor",
+    "description": "Creates a new user setup as a client advisor.",
+    "initialUserSubType": "clientAdvisor",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "clientAdvisor",
+      "employee"
+    ],
+    "lookupGroups": [
+      "clientAdvisor",
+      "employee",
+      "client",
+      "engageChatbot"
+    ],
+    "dynamicLookupVariable": "clientAdvisorId",
+    "actionPermissions": {
+      "create": [ "flowableAdministrator", "operationAdmin" ],
+      "deactivate": [ "flowableAdministrator", "operationAdmin" ],
+      "activate": [ "flowableAdministrator", "operationAdmin" ]
+    },
+    "initialVariables": {
+      "description": "Client Advisor"
+    },
+    "conversationFilters": [ "all", "internal", "external", "timeout", "deactivated-client" ],
+    "contactFilters": [ "clientAdvisorAll", "clientAdvisorInternal", "external"],
+    "translations": {
+	"de_de": {
+		"name": "Kundenberater"
+	},
+	"es_es": {
+		"name": "Asesor de clientes"
+	},
+	"it_it": {
+		"name": "Consulente cliente"
+	}
+    },
+    "allowedFeatures": [ "contacts", "work", "createWork", "tasks", "bubbles", "markdownInput", "replyToMessage", "forwardMessage", "reactToMessage", "fileUpload", "documents", "reports" ]
+  },
+
+  {
+    "key": "user-client-supporter",
+    "name": "Client Supporter",
+    "description": "Creates a new user setup as a client supporter.",
+    "initialUserSubType": "clientSupporter",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "clientSupporter",
+      "employee"
+    ],
+    "lookupGroups": [
+      "clientAdvisor",
+      "employee"
+    ],
+    "actionPermissions": {
+      "create": [ "flowableAdministrator", "operationAdmin" ],
+      "deactivate": [ "flowableAdministrator", "operationAdmin" ],
+      "activate": [ "flowableAdministrator", "operationAdmin" ]
+    },
+    "initialVariables": {
+      "description": "Client Advisor"
+    },
+    "conversationFilters": [ "all", "internal", "external" ],
+    "contactFilters": [ "clientAdvisorAll", "clientAdvisorInternal", "external"],
+    "allowedFeatures": [ "contacts", "work", "createWork", "tasks", "bubbles", "markdownInput", "replyToMessage", "forwardMessage", "reactToMessage", "fileUpload", "documents" ]
+  },
+
+  {
+    "key": "user-client",
+    "name": "Client",
+    "description": "Creates a new user setup as a client.",
+    "initialUserType": "external",
+    "initialUserSubType": "client",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F08_userInitFormClient",
+      "view": "F06_userViewFormClient",
+      "edit": "F05_userEditFormClient"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "client"
+    ],
+    "lookupGroups": [
+      "engageChatbot"
+    ],
+    "actionPermissions": {
+      "create": [ "flowableAdministrator", "operationAdmin" ],
+      "edit": [ "flowableAdministrator", "operationAdmin" ],
+      "deactivate": [ "flowableAdministrator", "operationAdmin" ],
+      "activate": [ "flowableAdministrator" ]
+    },
+    "initialVariables": {
+      "description": "Client"
+    },
+    "restVariables": {
+      "all": [
+        "clientAdvisorId", "address", "address2", "zip", "city", "country", "phone1", "phone2"
+      ]
+    },
+    "conversationFilters": [ "all" ],
+    "contactFilters": [ "all" ],
+    "allowedFeatures": [ "contacts", "bubbles", "markdownInput", "replyToMessage", "forwardMessage", "reactToMessage", "fileUpload", "documents" ]
+  },
+
+  {
+    "key": "user-external-client",
+    "name": "Client",
+    "description": "Creates a new user setup as an external client.",
+    "initialUserType": "external",
+    "initialUserSubType": "client",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F04_userInitFormClient",
+      "view": "F06_userViewFormClient",
+      "edit": "F05_userEditFormClient"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "client"
+    ],
+    "lookupGroups": [
+      "engageChatbot"
+    ],
+    "actionPermissions": {
+      "create": [ "flowableAdministrator", "operationAdmin" ],
+      "edit": [ "flowableAdministrator", "operationAdmin" ],
+      "deactivate": [ "flowableAdministrator", "operationAdmin" ],
+      "activate": [ "flowableAdministrator" ]
+    },
+    "initialVariables": {
+      "description": "Client"
+    },
+    "restVariables": {
+      "all": [
+        "clientAdvisorId"
+      ]
+    },
+    "conversationFilters": [ "all" ],
+    "contactFilters": [ "all" ],
+    "allowedFeatures": [ "contacts", "bubbles", "markdownInput", "replyToMessage", "forwardMessage", "reactToMessage", "fileUpload", "documents" ]
+  },
+
+  {
+    "key": "user-admin",
+    "name": "Administration User",
+    "description": "Creates a new, administration user.",
+    "initialUserSubType": "admin",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault",
+      "edit": "F03_userEditFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "flowableAdministrator"
+    ],
+    "lookupGroups":[
+      "flowableUser"
+    ],
+    "actionPermissions": {
+      "create": [ "flowableAdministrator"],
+      "edit": [ "flowableAdministrator" ],
+      "deactivate": [ "flowableAdministrator" ],
+      "activate": [ "flowableAdministrator" ]
+    },
+    "initialVariables": {
+      "adminUser": true,
+      "description": "Admin"
+    },
+    "conversationFilters": [ "all" ],
+    "contactFilters": [ "all", "internal", "external", "inactive", "clientsWithoutCa" ],
+    "allowedFeatures": [ "contacts", "createUser", "reports",
+      "actuators", "user-mgmt", "search-api", "workobject-api", "templateManagement",
+      "markdownInput", "replyToMessage", "forwardMessage", "reactToMessage", "fileUpload", "work", "createWork", "tasks", "documents",
+      "changeOwnPassword", "editOwnAvatar", "star-wars"]
+  },
+
+  {
+    "key": "user-operation-admin",
+    "name": "Operation Admin",
+    "description": "Creates a new user setup as a operation admin.",
+    "initialUserSubType": "operationAdmin",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "operationAdmin"
+    ],
+    "lookupGroups": [
+      "employee",
+      "client"
+    ],
+    "actionPermissions": {
+      "create": [ "flowableAdministrator" ],
+      "deactivate": [ "flowableAdministrator" ],
+      "activate": [ "flowableAdministrator" ]
+    },
+    "initialVariables": {
+      "description": "Operation Admin"
+    },
+    "contactFilters": [ "all", "internal", "external", "inactive", "clientsWithoutCa" ],
+    "allowedFeatures": [ "contacts", "createUser", "documents" ]
+  },
+
+  {
+    "key": "user-compliance",
+    "name": "Compliance Officer",
+    "description": "Creates a new user setup as a compliance officer.",
+    "initialUserSubType": "complianceOfficer",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "complianceOfficer"
+    ],
+    "lookupGroups":[
+      "flowableUser"
+    ],
+    "actionPermissions": {
+      "create": [ "flowableAdministrator" ],
+      "deactivate": [ "flowableAdministrator" ],
+      "activate": [ "flowableAdministrator" ]
+    },
+    "initialVariables": {
+      "description": "Compliance Officer"
+    },
+    "conversationFilters": [ "all" ],
+    "contactFilters": [ "all" ],
+    "allowedFeatures": [ "contacts", "work", "createWork", "tasks", "bubbles", "markdownInput", "replyToMessage", "forwardMessage", "reactToMessage", "fileUpload", "documents" ]
+  },
+
+  {
+    "key": "user-reporting",
+    "name": "Reporting User",
+    "description": "Creates a new user setup as a reporting user.",
+    "initialUserSubType": "reportingUser",
+    "initialState": "ACTIVE",
+    "initialSubState": "ACTIVE",
+    "forms": {
+      "init": "F01_userInitFormDefault",
+      "view": "F02_userViewFormDefault"
+    },
+    "memberGroups": [
+      "flowableUser",
+      "reporting"
+    ],
+    "actionPermissions": {
+      "create": [ "flowableAdministrator" ],
+      "deactivate": [ "flowableAdministrator" ],
+      "activate": [ "flowableAdministrator" ]
+    },
+    "initialVariables": {
+      "description": "Reporting User"
+    },
+    "allowedFeatures": [ "reports" ]
+  }
+]

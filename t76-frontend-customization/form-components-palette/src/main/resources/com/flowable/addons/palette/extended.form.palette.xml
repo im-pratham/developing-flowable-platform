@@ -1,0 +1,18 @@
+<palette xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" id="flowable-extended-form-palette"
+         xmlns="http://www.edorasware.com/schema/vis/palette" xsi:schemaLocation="http://www.edorasware.com/schema/vis/palette
+         http://www.edorasware.com/schema/vis/edoras-vis-form-palette-2.0.63.xsd" apply-patch-to-palette="flowable-form-palette,flowable-page-palette"
+         resource-bundle="com/flowable/addons/palette/i18n/translation-extensions">
+
+    <component-presentations base-palette-icon-path="component-presentations/palette-icons" base-editor-view-path="component-presentations/editor-views">
+        <component-presentation id="star-rating-component.presentation" palette-icon-path="stars.png" palette-big-icon-path="stars.png"
+                                editor-view-path="chart.view.svg"/>
+    </component-presentations>
+
+    <group id="formExtensions" index="99">
+        <component id="star-rating-component" ref="base-component" presentation-id="star-rating-component.presentation" xmltag="starRatingComponent">
+            <layout type="layout.form.controls" min-width="25" min-height="52" min-control-width="150" min-control-height="52" offset-x="10" offset-y="0"/>
+            <attribute id="value" visible="true"/>
+            <attribute id="stars" visible="true" path="extraSettings.stars"/>
+        </component>
+    </group>
+</palette>

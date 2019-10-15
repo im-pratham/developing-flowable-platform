@@ -1,0 +1,360 @@
+ .flw {
+  &__component {
+    &__input {
+      border: 0;
+      border-radius: 3px;
+      box-shadow: 0 0 0 1px #d8d6d1;
+
+      &::placeholder {
+        color: #333;
+      }
+    }
+
+    &__input {
+      &:hover:not([disabled]) {
+        box-shadow: 0 0 0 1px $primaryColor;
+      }
+
+      &:focus {
+        box-shadow: 0 0 0 2px $primaryColor;
+      }
+    }
+
+    &--required {
+      &__label {
+        span::after {
+        }
+      }
+    }
+
+    &--invalid {
+      &__label {
+        span::after {
+          color: $accentColor1;
+        }
+      }
+    }
+  }
+
+  &__panel {
+    &__label {
+      font-size: 30px;
+      padding: 0;
+    }
+
+    &__header {
+      padding-bottom: 15px;
+    }
+
+    &__row {
+      margin-bottom: 10px;
+    }
+  }
+}
+
+.flw__radio-group {
+  &__label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  &__list {
+    padding: 0;
+  }
+}
+
+.flw__text,
+.flw__textarea,
+.flw__select,
+.flw__date,
+.flw__number {
+  position: relative;
+  padding-top: 15px;
+  margin-top: 10px;
+}
+
+.flw__text__label,
+.flw__textarea__label,
+.flw__select__label,
+.flw__date__label,
+.flw__number__label {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.flw__text--empty__label,
+.flw__textarea--empty__label,
+.flw__select--empty__label,
+.flw__date--empty__label,
+.flw__number--empty__label {
+}
+
+.flw__text--focused__label.flw__text--empty__label,
+.flw__textarea--focused__label.flw__textarea--empty__label,
+.flw__select-focused__label.flw__select--empty__label,
+.flw__date--focused__label.flw__date--empty__label,
+.flw__number--focused__label.flw__number--empty__label {
+}
+
+.flw__error-list__error-list-item {
+  color: $accentColor1;
+}
+
+/* Radio buttons */
+li.flw__radio-group__radio {
+  display: block;
+  padding: 5px 20px;
+  position: relative;
+}
+
+li.flw__radio-group__radio input:not(.flw__text__input) {
+  display: none;
+}
+
+.flw__radio-group__input:checked {
+  background: none;
+}
+
+.flw__radio-group__radio__label {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0.7em;
+    left: 0px;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px #b4bbbc;
+  }
+
+  &:hover {
+    &::before {
+      box-shadow: 0 0 0 2px $primaryColor;
+    }
+  }
+
+  &--active {
+    &::before {
+      box-shadow: 0 0 0 1px $primaryColor;
+    }
+  }
+}
+
+.flw__radio-group__radio--active::after {
+  content: '';
+  position: absolute;
+  top: 11px;
+  left: 1px;
+  height: 12px;
+  width: 12px;
+  background: $primaryColor;
+  border-radius: 50%;
+}
+
+.flw__select__multi-value {
+  background-color: $primaryColor;
+}
+
+.flw__select__input {
+  background-color: white;
+  padding: 0;
+
+  .flw__select {
+    &__control,
+    &__control--menu-is-open {
+      border: none;
+      border-radius: 3px;
+      background: none;
+
+      .flw__select__value-container {
+      }
+    }
+
+    &__control--is-focused {
+      box-shadow: 0 0 0 1px $primaryColor;
+    }
+
+    &__clear-indicator {
+      display: none;
+    }
+
+    &__indicator-separator {
+      background-color: rgba(0, 0, 0, 0);
+    }
+
+    &__menu {
+      border: 1px solid $primaryColor;
+      border-top: 0;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      left: -1px;
+      margin-top: -2px;
+      width: calc(100% + 2px);
+
+      .flw__select__option {
+        &--is-focused {
+          background: #e8f5f7;
+          color: $primaryColorTint;
+        }
+      }
+    }
+  }
+}
+
+.flw__upload {
+  &__label {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+}
+
+.react-datepicker {
+  &-wrapper,
+  &__input-container,
+  &__input-container input {
+    background: none;
+  }
+}
+
+.flw__date .react-datepicker__header {
+  background: $primaryColor;
+}
+
+.flw__date
+  .react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item--selected {
+  background: $gray;
+}
+
+.flw__date
+  .react-datepicker__time-container
+  .react-datepicker__time
+  .react-datepicker__time-box
+  ul.react-datepicker__time-list
+  li.react-datepicker__time-list-item:hover {
+  background: $gray;
+}
+
+.flw__date .react-datepicker__day--keyboard-selected,
+.flw__date .react-datepicker__day--selected {
+  border: none;
+  background: $gray;
+  color: white;
+}
+
+.flw__date .react-datepicker__day:hover {
+  background: $gray;
+}
+
+.flw__textarea__input {
+  padding: 8px 3px;
+  resize: none;
+}
+
+.flw__boolean__label {
+}
+
+.flw__boolean:hover,
+.flw__boolean__input:not(:checked):hover + label,
+.flw__boolean__input:checked + label {
+}
+
+.flw__boolean:checked:hover,
+.flw__boolean__input:checked:hover + label {
+}
+
+.flw__boolean__input,
+.flw__boolean__input:focus {
+}
+
+.flw__boolean__input:hover {
+}
+
+.flw__boolean__input:checked {
+  background-color: $primaryColor;
+}
+
+.flw__boolean__input:checked:hover {
+}
+
+.flw__boolean__input:checked:before {
+}
+
+.flw__component__button,
+.flw__subform__add-button {
+  background: $primaryColor;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 700;
+  outline: none;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  text-overflow: ellipsis;
+  text-transform: none;
+  user-select: none;
+  white-space: nowrap;
+
+  &:hover,
+  &:hover:enabled {
+    background: $primaryColor2;
+    color: #fff;
+    transform: none;
+  }
+
+  &[disabled] {
+    background: #daddde;
+    color: #6c7576;
+    cursor: default;
+    pointer-events: none;
+  }
+}
+
+.flw__script-button button {
+  padding: 0;
+}
+
+.flw__component__button,
+.flw__flw-form,
+.flw__html-component h1,
+.flw__html-component h2,
+.flw__html-component h3 {
+  font-family: 'FrutigerNext', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell',
+    'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+}
+
+.flw__tabs__tab-item {
+  &__button {
+    text-transform: initial;
+    padding: 10px;
+  }
+
+  &--active__button {
+    border-color: $primaryColor;
+    border-bottom-width: 4px;
+  }
+}
+
+.flw__wizard__stages__stage {
+  &--active {
+    color: $primaryColor;
+
+    &::before {
+      border-color: $primaryColor;
+    }
+  }
+}
+
+/** TODO: Hid some details in the header, can be removed once custom Work Details available **/
+
+aside.flw-header-detail__details__sidebar.flw-header-detail__details__sidebar--left {
+  display: none;
+}

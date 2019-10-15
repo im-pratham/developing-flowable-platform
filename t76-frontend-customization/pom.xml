@@ -15,7 +15,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>flowable-work-customized</module>
-        <module>custom-frontend-components</module>
+        <module>form-components-palette</module>
+        <module>flowable-design-customized</module>
     </modules>
 
 </project>

@@ -1,0 +1,87 @@
+/* String replace */
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search);
+
+  @if $index {
+    @return str-slice($string, 1, $index - 1) + $replace +
+      str-replace(str-slice($string, $index + str-length($search)), $search, $replace);
+  }
+
+  @return $string;
+}
+
+/* @font-face: generic */
+@mixin fontFace($name, $style, $weight, $local, $path, $exts) {
+  $localName1: local($name + ' ' + $local);
+  $localName2: local(str-replace($name, ' ', '') + '-' + str-replace($local, ' ', ''));
+  $src: $localName1 + ',' + $localName2;
+
+  @each $ext in $exts {
+    $src: append($src, url(quote($path + '.' + $ext)) format(quote($ext)), comma);
+  }
+
+  @font-face {
+    font-family: quote($name);
+    font-style: $style;
+    font-weight: $weight;
+    src: $src;
+  }
+}
+
+/* @font-face: structured & woff+woff2  */
+@mixin fontFaceWoff2($name, $style, $weight, $local, $path) {
+  $pathStyle: $weight;
+  @if $weight == 400 {
+    $pathStyle: to_lower_case($local);
+  }
+  @if $style == italic {
+    $pathStyle: append($pathStyle, 'italic');
+  }
+  @include fontFace($name, $style, $weight, $local, $path + $pathStyle, woff woff2);
+}
+
+@mixin fontPrimary($name, $weight: 300) {
+  font-family: $name;
+  font-weight: $weight;
+  font-size: 18px;
+}
+
+// Small tablets and large smartphones (landscape view)
+$screen-sm-min: 576px;
+
+// Small tablets (portrait view)
+$screen-md-min: 768px;
+
+// Tablets and small desktops
+$screen-lg-min: 992px;
+
+// Large tablets and desktops
+$screen-xl-min: 1200px;
+
+// Small devices
+@mixin sm {
+  @media (min-width: #{$screen-sm-min}) {
+    @content;
+  }
+}
+
+// Medium devices
+@mixin md {
+  @media (min-width: #{$screen-md-min}) {
+    @content;
+  }
+}
+
+// Large devices
+@mixin lg {
+  @media (min-width: #{$screen-lg-min}) {
+    @content;
+  }
+}
+
+// Extra large devices
+@mixin xl {
+  @media (min-width: #{$screen-xl-min}) {
+    @content;
+  }
+}

@@ -9,7 +9,19 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>custom-frontend-components</artifactId>
+    <artifactId>form-components-palette</artifactId>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.1</version>
+                <configuration>
+                    <finalName>training-forms-palette</finalName>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
 </project>

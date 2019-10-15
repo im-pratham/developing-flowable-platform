@@ -1,0 +1,121 @@
+@import '~@flowable/work/theme.scss';
+
+@import './_mixins';
+@import './_colors';
+@import './_helpers';
+
+.theme-flowable {
+  @import './_overrides';
+
+  @include theme(
+    (
+      themeName: 'flowable',
+      textFg: #000,
+      sidebarBg: #fff,
+      sidebarFg: #b4bbbc,
+      sidebarL1Bg: black,
+      sidebarL1Fg: #fff,
+      sidebarL2Bg: #fff,
+      sidebarL2Fg: #333,
+      sidebarL2SelectedBg: $red,
+      sidebarL2SelectedFg: #fff,
+      sidebarCreateBg: $red,
+      avatarBg: #aaa
+    )
+  );
+
+  .flw-switcher {
+    &__nav {
+      &__start {
+        background: #333e3f;
+      }
+
+      &__end {
+        background: #333e3f;
+      }
+    }
+  }
+
+  .flw-switcher--expand .flw-switcher__nav .flw-switcheritem {
+    border-bottom: 1px solid #6c7576;
+    padding: 0;
+    font-family: 'Star Jedi', sans-serif;
+
+    &:hover {
+      background: #eaebec;
+      color: $primaryColor;
+
+      svg {
+        color: $primaryColor;
+      }
+    }
+
+    &:last-child {
+      border-bottom: 0;
+
+      &:hover {
+        background: transparent;
+      }
+    }
+
+    &--selected {
+      background: #1c2122;
+      box-shadow: inset 4px 0 0 0 #de3919;
+      flex-direction: column;
+      height: auto;
+      padding: 10px 0;
+
+      &:hover {
+        background: $primaryColorTint;
+
+        .flw-switcheritem__icon svg {
+          color: #fff;
+        }
+      }
+
+      .flw-switcheritem {
+        &__icon {
+          svg {
+            height: 30px;
+            width: 30px;
+          }
+        }
+
+        &__label {
+          font-size: 24px;
+          padding: 4px 12.8px;
+          white-space: normal;
+        }
+
+        &__badge {
+          display: none;
+        }
+
+        .flw-switcheritem--sub {
+          .flw-switcheritem__label {
+            font-size: 5px;
+          }
+        }
+      }
+    }
+  }
+
+  // @media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+  .flw-switcher {
+    &__nav {
+      background: #fff url('./flw.png') no-repeat;
+      background-size: 60px;
+      background-position: center 15px;
+      padding-top: 60px;
+      border-right: 1px #e1e1e1 solid;
+    }
+    &--expand .flw-switcher__nav {
+      background: #fff url('./logo.png') no-repeat;
+      background-size: 160px;
+      background-position: 16px 16px;
+      padding-top: 61px;
+    }
+  }
+
+  // }
+}
