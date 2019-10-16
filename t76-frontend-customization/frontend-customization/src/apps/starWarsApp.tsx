@@ -15,11 +15,11 @@ export const StarWarsApp = (props: StarWarsAppProps) => {
     useEffect(async () => {
         const response = await fetch('https://swapi.co/api/films');
         const films = await response.json();
+        // select one at random...
         let theFilm = films.results[Math.floor(Math.random() * films.results.length)];
-        // TODO: Reloading crashes the react tree?
-        // setFilm(theFilm);
+        setFilm(theFilm);
         setFilms(films);
-    });
+    }, []);
 
     const title = `Episode ${film.episode_id}`;
 
@@ -31,7 +31,9 @@ export const StarWarsApp = (props: StarWarsAppProps) => {
 
     console.log("Current films and film", films, film);
 
-    let filmsList = films ? films.results.map((f: any) => <li>{f.title}</li>) : <div/>;
+    let filmsList = films ? films.results.map((f: any) =>
+        <li style={f.title === film.title ? {fontWeight: "bolder"}: {}} onClick={() => setFilm(films.results.filter((fi: any) => fi.title === f.title)[0])}>{f.title}</li>)
+        : <div/>;
 
     return (
         <>
