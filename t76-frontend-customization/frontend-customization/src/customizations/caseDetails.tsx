@@ -4,9 +4,8 @@ import {CaseInstance, DetailCustomizations, ExternalTab, TypeBadgeCustomization}
 
 async function caseTypeBadgeCustomization(element: CaseInstance): Promise<TypeBadgeCustomization> {
     return Promise.resolve({
-        label: 'Case',
-        iconName: 'bells',
-        className: 'flo-typeBadge--bells'
+        label: `Case with id ${element.id}`,
+        iconName: 'sitemap/solid'
     });
 }
 
@@ -15,10 +14,10 @@ function caseTabsCustomization(element: CaseInstance): Promise<DetailCustomizati
     // request is completed. Element contains Case details, if you need more info in there ask the product team!
     const externalTabs: { [tabId: string]: ExternalTab } = {
         progress: {
-            label: 'Progress',
+            label: 'My custom tab',
             icon: 'tachometer',
             order: 1,
-            component: () => <div/>
+            component: () => (<div>Add your custom content here for case instance {element.id}</div>)
         }
     };
 
