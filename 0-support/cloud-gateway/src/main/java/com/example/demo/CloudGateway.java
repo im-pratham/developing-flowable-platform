@@ -1,12 +1,13 @@
 package com.example.demo;
 
-import java.util.Arrays;
+import java.util.Collections;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.gateway.route.RouteLocator;
 import org.springframework.cloud.gateway.route.builder.RouteLocatorBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.reactive.CorsConfigurationSource;
@@ -14,10 +15,10 @@ import org.springframework.web.cors.reactive.CorsWebFilter;
 import org.springframework.web.cors.reactive.UrlBasedCorsConfigurationSource;
 
 @SpringBootApplication
-public class DemoApplication {
+public class CloudGateway {
 
 	public static void main(String[] args) {
-		SpringApplication.run(DemoApplication.class, args);
+		SpringApplication.run(CloudGateway.class, args);
 	}
 
 	@Bean
@@ -32,18 +33,21 @@ public class DemoApplication {
 		corsConfig.addAllowedMethod(HttpMethod.GET);
 		corsConfig.addAllowedMethod(HttpMethod.OPTIONS);
 		corsConfig.setAllowCredentials(true);
-		corsConfig.setAllowedOrigins(Arrays.asList("http://localhost:8091"));
+		corsConfig.setAllowedOrigins(Collections.singletonList("*"));
 		source.registerCorsConfiguration("/**", corsConfig);
 		return source;
 	}
 
+	/**
+	 * http://localhost:8042/swapi/api/people/?format=json
+	 */
 	@Bean
 	public RouteLocator myRoutes(RouteLocatorBuilder builder) {
 		return builder.routes()
-			.route(p -> p
-				.path("/**")
-				.filters(f -> f.addRequestHeader("Hello", "World"))
-				.uri("https://swapi.co/api"))
+			.route("swapi", p -> p
+				.path("/swapi/**")
+				.filters(fn -> fn.stripPrefix(1).dedupeResponseHeader(HttpHeaders.ACCESS_CONTROL_ALLOW_ORIGIN, "RETAIN_FIRST"))
+				.uri("https://swapi.co"))
 			.build();
 	}
 

@@ -1,10 +1,2 @@
 server:
   port: 8042
-spring:
-  cloud:
-    gateway:
-      globalcors:
-        corsConfigurations:
-          '[/**]':
-            allowedOrigins: "http://localhost:8091"
-            allowedMethods: "*"
