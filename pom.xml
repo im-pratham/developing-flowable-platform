@@ -29,6 +29,7 @@
         <module>t74-template-engine</module>
         <module>t78-creating-fe-app-with-forms/flowable-formscustomapp-app</module>
         <module>t76-frontend-customization</module>
+        <module>0-support</module>
     </modules>
 
     <name>Developing with Flowable Platform</name>
