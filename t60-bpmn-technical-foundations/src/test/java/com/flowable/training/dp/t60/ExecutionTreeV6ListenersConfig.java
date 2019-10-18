@@ -5,8 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import com.flowable.spring.boot.EngineConfigurationConfigurer;
-
 import org.flowable.common.engine.api.delegate.event.FlowableEvent;
 import org.flowable.common.engine.api.delegate.event.FlowableEventListener;
 import org.flowable.common.engine.impl.cfg.TransactionState;
@@ -16,11 +14,13 @@ import org.flowable.spring.SpringProcessEngineConfiguration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 
+import com.flowable.spring.boot.EngineConfigurationConfigurer;
+
 @Configuration
 public class ExecutionTreeV6ListenersConfig implements EngineConfigurationConfigurer<SpringProcessEngineConfiguration> {
 
     @Autowired
-    private ActivitiyEventListener activitiyEventListener;
+    private ActivityEventListener activityEventListener;
 
     @Override
     public void configure(SpringProcessEngineConfiguration engineConfiguration) {
@@ -32,27 +32,27 @@ public class ExecutionTreeV6ListenersConfig implements EngineConfigurationConfig
             eventListeners = new ArrayList<>();
         }
         engineConfiguration.setEventListeners(eventListeners);
-        eventListeners.addAll(flowableEventListeners(activitiyEventListener));
+        eventListeners.addAll(flowableEventListeners(activityEventListener));
     }
 
-    private Collection<FlowableEventListener> flowableEventListeners(ActivitiyEventListener activitiyEventListener) {
-        return Collections.singleton(new EventLogger(activitiyEventListener));
+    private Collection<FlowableEventListener> flowableEventListeners(ActivityEventListener activityEventListener) {
+        return Collections.singleton(new EventLogger(activityEventListener));
     }
 
     private static final class EventLogger implements FlowableEventListener {
 
-        private final ActivitiyEventListener activitiyEventListener;
+        private final ActivityEventListener activityEventListener;
 
-        private EventLogger(ActivitiyEventListener activitiyEventListener) {
-            this.activitiyEventListener = activitiyEventListener;
+        private EventLogger(ActivityEventListener activityEventListener) {
+            this.activityEventListener = activityEventListener;
         }
 
         @Override
         public void onEvent(FlowableEvent event) {
             if (event instanceof FlowableActivityEvent) {
-                activitiyEventListener.observe((FlowableActivityEvent) event);
+                activityEventListener.observe((FlowableActivityEvent) event);
             } else if (event instanceof FlowableSequenceFlowTakenEvent) {
-                activitiyEventListener.observeSequenceFlowTaken((FlowableSequenceFlowTakenEvent) event);
+                activityEventListener.observeSequenceFlowTaken((FlowableSequenceFlowTakenEvent) event);
             }
         }
 

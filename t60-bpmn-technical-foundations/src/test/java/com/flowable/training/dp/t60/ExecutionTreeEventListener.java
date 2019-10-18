@@ -17,7 +17,7 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 @Component
-public class ExecutionTreeEventListener implements ActivitiyEventListener {
+public class ExecutionTreeEventListener implements ActivityEventListener {
 
     private Map<String, Map<String, Character>> simplifiedExecutionMap = new HashMap<>();
 
