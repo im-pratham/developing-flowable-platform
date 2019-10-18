@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {TwitterTimelineEmbed} from 'react-twitter-embed';
+import {TwitterTimelineEmbed} from 'react-twitter-embed/dist/index.js';
 
 import {ExternalAppComponentProps} from '@flowable/work';
 
