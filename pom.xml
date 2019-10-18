@@ -14,7 +14,9 @@
         <module>0-flowable-work-base</module>
         <module>0-flowable-work-autoconfig</module>
         <!--<module>1-flowable-design</module>-->
+        <!-- TODO
         <module>t11-work-with-indices/flowableworkindexing-app</module>
+        -->
         <module>t13-data-object-engine</module>
         <module>t22-integrate-with-externals-systems</module>
         <module>t42-hello-world</module>
